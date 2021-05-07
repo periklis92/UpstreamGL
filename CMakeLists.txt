@@ -21,6 +21,6 @@ endif ()
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_COLOR_MAKEFILE   ON)
-
 # Include sub-projects.
+add_subdirectory ("libraries/reactphysics3d")
 add_subdirectory ("UpstreamGLib")

@@ -59,7 +59,7 @@ add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp::assimp)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL glfw imgui::imgui cereal)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL glfw imgui::imgui cereal reactphysics3d)
 
 set(${PROJECT_NAME}_RESOURCE_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/resources

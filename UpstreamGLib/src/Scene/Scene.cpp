@@ -8,8 +8,12 @@ Node& Scene::CreateNode(const std::string& name)
 
 Node& Scene::GetNode(const std::string& name)
 {
-    // return *std::find(m_Nodes.begin(), m_Nodes.end(), [name](Node& node) -> bool{ return node.GetName() == name; });
     return *m_Nodes[name];
+}
+
+Scene::NodeContainer::iterator Scene::FindNode(const std::string& name)
+{
+    return m_Nodes.find(name);
 }
 
 void Scene::SetMainCamera(Camera* camera)

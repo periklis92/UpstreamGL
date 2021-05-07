@@ -14,7 +14,6 @@ set(CMAKE_DISABLE_SOURCE_CHANGES  ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
 if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
   message(SEND_ERROR "In-source builds are not allowed.")
 endif ()
@@ -23,6 +22,9 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_COLOR_MAKEFILE   ON)
 # Include sub-projects.
 
+set(SKIP_PERFORMANCE_COMPARISON ON)
+
 add_subdirectory ("libraries/imgui")
+add_subdirectory ("libraries/cereal")
 add_subdirectory ("libraries/reactphysics3d")
 add_subdirectory ("UpstreamGLib")

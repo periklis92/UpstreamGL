@@ -12,8 +12,6 @@ SET(OPTIONS "")
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp CONFIG REQUIRED)
-find_package(imgui CONFIG REQUIRED)
-find_package(cereal CONFIG REQUIRED)
 
 find_package(glfw3 3.3 REQUIRED)
 add_definitions(-DGLFW_INCLUDE_NONE)

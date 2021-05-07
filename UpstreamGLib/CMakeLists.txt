@@ -28,6 +28,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/src/**/**/*.cpp)
 
 include_directories(
+${IMGUI_INCLUDE_DIR}
 ${OPENGL_INCLUDE_DIR} 
 ${GLM_INCLUDE_DIR}
 ${CMAKE_CURRENT_SOURCE_DIR}/src
@@ -59,7 +60,7 @@ add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp::assimp)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL glfw imgui::imgui cereal reactphysics3d)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL ImGui glfw cereal reactphysics3d)
 
 set(${PROJECT_NAME}_RESOURCE_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/resources

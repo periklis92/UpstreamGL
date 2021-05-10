@@ -31,8 +31,9 @@
 #define GLR_DEBUG_LOG_CRITICAL(message) 
 #endif
 
-#define GLR_LOG(message, ...)                    Logger::GetInstance()->Log(LogEntry::None, message, __VA_ARGS__);
-#define GLR_LOG_INFO(message, ...)               Logger::GetInstance()->Log(LogEntry::Info, message, __VA_ARGS__);
-#define GLR_LOG_WARNING(message, ...)            Logger::GetInstance()->Log(LogEntry::Warning, message, __VA_ARGS__);
-#define GLR_LOG_ERROR(message, ...)              Logger::GetInstance()->Log(LogEntry::Error, message, __VA_ARGS__);
-#define GLR_LOG_CRITICAL(message, ...)           Logger::GetInstance()->Log(LogEntry::Critical, message, __VA_ARGS__);
+#define VA_ARGS(...) , ##__VA_ARGS__
+#define GLR_LOG(message, ...)                    Logger::GetInstance()->Log(LogEntry::None, message VA_ARGS(__VA_ARGS__));
+#define GLR_LOG_INFO(message, ...)               Logger::GetInstance()->Log(LogEntry::Info, message VA_ARGS(__VA_ARGS__));
+#define GLR_LOG_WARNING(message, ...)            Logger::GetInstance()->Log(LogEntry::Warning, message VA_ARGS(__VA_ARGS__));
+#define GLR_LOG_ERROR(message, ...)              Logger::GetInstance()->Log(LogEntry::Error, message VA_ARGS(__VA_ARGS__));
+#define GLR_LOG_CRITICAL(message, ...)           Logger::GetInstance()->Log(LogEntry::Critical, message VA_ARGS(__VA_ARGS__));

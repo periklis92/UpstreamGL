@@ -3,6 +3,7 @@
 #include <cassert>
 #include <type_traits>
 #include <cassert>
+#include <functional>
 #include "Event.h"
 
 template<auto F>

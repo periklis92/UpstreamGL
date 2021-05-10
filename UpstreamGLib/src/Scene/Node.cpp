@@ -1,6 +1,7 @@
 #include "Node.h"
 #include "Math/Math.h"
 #include <glm/gtx/euler_angles.hpp>
+#include <algorithm>
 Node::Node(const std::string& name)
 	:m_Parent(nullptr), m_Children(), m_Name(name), 
 		m_LocalTransform(glm::identity<glm::mat4>()), 

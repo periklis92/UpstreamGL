@@ -5,13 +5,19 @@ cmake_minimum_required (VERSION 3.8)
 
 project("UpstreamGLib")
 
+if (MSVC)
 include("C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
+endif()
 
 SET(OPTIONS "")
 
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp CONFIG REQUIRED)
+
+# if (NOT ASSIMP_FOUND)
+#     message( SEND_ERROR "ASSIMP NOT FOUND!" )
+# endif()
 
 find_package(glfw3 3.3 REQUIRED)
 add_definitions(-DGLFW_INCLUDE_NONE)
@@ -25,17 +31,17 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/src/**/**/*.cpp)
 
+message(glaaaaaaaad: ${GLAD_INCLUDE_DIR})
+
 include_directories(
+${CMAKE_CURRENT_SOURCE_DIR}/src
+${GLAD_INCLUDE_DIR}
 ${IMGUI_INCLUDE_DIR}
 ${OPENGL_INCLUDE_DIR} 
 ${GLM_INCLUDE_DIR}
-${CMAKE_CURRENT_SOURCE_DIR}/src
-${CMAKE_CURRENT_SOURCE_DIR}/GLAD/include)
+)
 
-file(GLOB SRC_GLAD 
-${CMAKE_CURRENT_SOURCE_DIR}/GLAD/src/glad.c)
-
-# set(ASSIMP_BUILD_STATIC_LIB ON)
+set(ASSIMP_BUILD_STATIC_LIB ON)
 
 IF(MSVC)
     SET(OPTIONS WIN32)
@@ -44,7 +50,7 @@ ENDIF(MSVC)
 include(CTest)
 enable_testing()
 
-add_executable (${PROJECT_NAME} ${OPTIONS} "main.cpp" ${SRC_GLAD} ${SRC_FILES})
+add_executable (${PROJECT_NAME} ${OPTIONS} "main.cpp" ${GLAD_SOURCE} ${SRC_FILES})
 
 include(CPack)
 
@@ -52,10 +58,14 @@ include(CPack)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
-target_link_libraries(${PROJECT_NAME} PRIVATE debug assimp::assimp)
+target_link_libraries(${PROJECT_NAME} PRIVATE debug assimp)
 else()
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
-target_link_libraries(${PROJECT_NAME} PRIVATE assimp::assimp)
+target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
+endif()
+
+if (UNIX)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL imgui glfw cereal reactphysics3d stb)

@@ -25,10 +25,11 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance,_In_opt_ HINSTANCE hPrevInstance,_I
 }																									\
 
 #else
-int main(int argc, char* argv[])
-{
-	return 0;
+#define GLR_APP_IMPL(AppType)							\
+int main(int argc, char* argv[])						\
+{														\
+	AppType app(argc, argv);							\
+	return app.MainLoop();								\
 }
-
 
 #endif

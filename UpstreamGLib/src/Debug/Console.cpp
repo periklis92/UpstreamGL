@@ -40,7 +40,7 @@ void Console::Draw()
 		{
 			for (int i = 0; i < m_Logs.size(); ++i)
 			{
-				LogEntry::LogType lType = m_Logs[i]._Myfirst._Val;
+				LogEntry::LogType lType = std::get<0>(m_Logs[i]);
 				if ((lType != LogEntry::Warning || (lType == LogEntry::Warning && m_ShowWarn)) &&
 					(lType != LogEntry::Error || (lType == LogEntry::Error && m_ShowError)))
 				{
@@ -65,7 +65,7 @@ void Console::Draw()
 					}
 					
 					ImGui::PushTextWrapPos(ImGui::GetWindowSize().x);
-					ImGui::TextColored(txtCol, "%s", m_Logs[i]._Get_rest()._Myfirst._Val.data());
+					ImGui::TextColored(txtCol, "%s", std::get<1>(m_Logs[i]).data());
 					ImGui::PopTextWrapPos();
 					ImGui::Separator();
 				}
@@ -87,7 +87,7 @@ void Console::Clear()
 	m_LogIndex = 0;
 	for(int i = 0; i < GLR_CONSOLE_LOG_SIZE; ++i)
 	{
-		m_Logs[i]._Get_rest()._Myfirst._Val.clear();
+		std::get<1>(m_Logs[i]).clear();
 	}
 }
 

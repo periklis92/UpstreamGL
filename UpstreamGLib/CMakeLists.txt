@@ -43,9 +43,12 @@ ${GLM_INCLUDE_DIR}
 
 set(ASSIMP_BUILD_STATIC_LIB ON)
 
-IF(MSVC)
+if(MSVC)
     SET(OPTIONS WIN32)
-ENDIF(MSVC)
+    set(ASSIMP_LIB assimp::assimp)
+else()
+    set(ASSIMP_LIB assimp)
+endif(MSVC)
 
 include(CTest)
 enable_testing()
@@ -56,12 +59,14 @@ include(CPack)
 
 #add_library(${PROJECT_NAME} STATIC "main.cpp" ${SRC_GLAD} ${SRC_FILES})
 
+
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
-target_link_libraries(${PROJECT_NAME} PRIVATE debug assimp)
+target_link_libraries(${PROJECT_NAME} PRIVATE debug ${ASSIMP_LIB})
 else()
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
-target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${ASSIMP_LIB})
 endif()
 
 if (UNIX)

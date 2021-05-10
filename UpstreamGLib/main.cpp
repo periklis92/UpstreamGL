@@ -31,6 +31,7 @@
 #include "Resources/MeshResource.h"
 #include "Resources/AnimationResource.h"
 #include "Components/Camera.h"
+// #include "stb/stb_truetype.h"
 
 class CameraController
 	: public Component
@@ -114,11 +115,6 @@ private:
 	}
 
 };
-
-int unbound(int)
-{
-	return 1;
-}
 
 class MyApp : public Application
 {

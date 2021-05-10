@@ -1,0 +1,15 @@
+
+cmake_minimum_required (VERSION 3.8)
+project("stb")
+
+
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+set(STB_IMPLEMENTATION ${CMAKE_CURRENT_SOURCE_DIR}/src/stb_truetype.c)
+
+add_library(${PROJECT_NAME} STATIC ${STB_IMPLEMENTATION})
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+)

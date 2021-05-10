@@ -38,6 +38,8 @@ private:
 	bool __WindowClosedCallback(const WindowCloseEvent*);
 	bool __WindowResizeCallback(const WindowResizeEvent*);
 
+	void __InitImGui();
+
 private:
 	std::string m_AppName;
 	std::filesystem::path m_RootPath;

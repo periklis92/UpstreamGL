@@ -69,13 +69,7 @@ void Application::OnInitialize()
 	m_Window->OnWindowClose() += EventDelegate<WindowCloseEvent>{ConnectFunc<&Application::__WindowClosedCallback>, this};
 	m_Window->OnWindowResize() += EventDelegate<WindowResizeEvent>{ ConnectFunc<&Application::__WindowResizeCallback>, this };
 
-	ImGui::CreateContext();
-
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	ImGui_ImplGlfw_InitForOpenGL(GetWindow()->GetNativeHandle(), true);
-	ImGui_ImplOpenGL3_Init("#version 460 core");
-	ImGui::StyleColorsDark();
-	io.Fonts->AddFontDefault();
+	__InitImGui();
 }
 
 void Application::OnGui()
@@ -104,9 +98,10 @@ int Application::MainLoop()
 	m_LastFrameTime = static_cast<float>(glfwGetTime());
 	while (m_IsRunning)
 	{
+		GLR_PROFILER_START("Main Loop");
 		GLR_PROFILER_START("Update Loop");
 
-		float currentTime = glfwGetTime();
+		float currentTime = static_cast<float>(glfwGetTime());
 		m_DeltaTime = currentTime - m_LastFrameTime;
 		m_LastFrameTime = currentTime;
 		m_Scheduler->Update(m_DeltaTime);
@@ -128,7 +123,7 @@ int Application::MainLoop()
 		GLR_PROFILER_END();
 
 		m_Window->Update();
-		
+		GLR_PROFILER_END();
 	}
 	OnExit();
 	return 0;
@@ -179,6 +174,67 @@ bool Application::__WindowResizeCallback(const WindowResizeEvent* e)
 	return true;
 }
 
+void Application::__InitImGui()
+{
+	ImGui::CreateContext();
+
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui_ImplGlfw_InitForOpenGL(GetWindow()->GetNativeHandle(), true);
+	ImGui_ImplOpenGL3_Init("#version 460 core");
+	// ImGui::StyleColorsDark();
+	auto& style = ImGui::GetStyle();
+
+	style.WindowPadding = ImVec2(15.f, 15.f);
+	style.WindowRounding = 7.0f;
+	style.FramePadding = ImVec2(5, 5);
+	style.FrameRounding = 4.0f;
+	style.ItemSpacing = ImVec2(12, 8);
+	style.ItemInnerSpacing = ImVec2(8, 6);
+	style.IndentSpacing = 25.0f;
+	style.ScrollbarSize = 15.0f;
+	style.ScrollbarRounding = 9.0f;
+	style.GrabMinSize = 5.0f;
+	style.GrabRounding = 3.0f;
+ 
+	ImGui::PushStyleColor(ImGuiCol_Text 			, ImVec4(0.24f, 0.24f, 0.24f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_TextDisabled		, ImVec4(0.32f, 0.32f, 0.32f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_WindowBg 		, ImVec4(0.92f, 0.75f, 0.07f, .92f));
+	ImGui::PushStyleColor(ImGuiCol_ChildBg 			, ImVec4(0.07f, 0.07f, 0.09f, .92f));
+	ImGui::PushStyleColor(ImGuiCol_PopupBg 			, ImVec4(0.07f, 0.07f, 0.09f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_Border			, ImVec4(0.80f, 0.80f, 0.83f, 0.88f));
+	ImGui::PushStyleColor(ImGuiCol_BorderShadow		, ImVec4(0.92f, 0.91f, 0.88f, 0.00f));
+	ImGui::PushStyleColor(ImGuiCol_FrameBg			, ImVec4(0.10f, 0.09f, 0.12f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_FrameBgHovered	, ImVec4(0.24f, 0.23f, 0.29f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_FrameBgActive	, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg			, ImVec4(0.10f, 0.09f, 0.12f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBgCollapsed	, ImVec4(1.00f, 0.98f, 0.95f, 0.75f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive	, ImVec4(0.07f, 0.07f, 0.09f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_MenuBarBg		, ImVec4(0.10f, 0.09f, 0.12f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ScrollbarBg		, ImVec4(0.10f, 0.09f, 0.12f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ScrollbarGrab	, ImVec4(0.80f, 0.80f, 0.83f, 0.31f));
+	ImGui::PushStyleColor(ImGuiCol_CheckMark		, ImVec4(0.80f, 0.80f, 0.83f, 0.31f));
+	ImGui::PushStyleColor(ImGuiCol_SliderGrab		, ImVec4(0.80f, 0.80f, 0.83f, 0.31f));
+	ImGui::PushStyleColor(ImGuiCol_SliderGrabActive	, ImVec4(0.06f, 0.05f, 0.07f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_Button			, ImVec4(0.10f, 0.09f, 0.12f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered	, ImVec4(0.24f, 0.23f, 0.29f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive		, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_Header			, ImVec4(0.23f, 0.20f, 0.13f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_HeaderHovered	, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_HeaderActive		, ImVec4(0.06f, 0.05f, 0.07f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ResizeGrip		, ImVec4(0.00f, 0.00f, 0.00f, 0.00f));
+	ImGui::PushStyleColor(ImGuiCol_ResizeGripHovered, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ResizeGripActive	, ImVec4(0.06f, 0.05f, 0.07f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_PlotLines		, ImVec4(0.22f, 0.59f, 0.38f, 0.63f));
+	ImGui::PushStyleColor(ImGuiCol_PlotLinesHovered	, ImVec4(0.25f, 1.00f, 0.00f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_PlotHistogram	, ImVec4(0.40f, 0.39f, 0.38f, 0.63f));
+	ImGui::PushStyleColor(ImGuiCol_TextSelectedBg	, ImVec4(0.25f, 1.00f, 0.00f, 0.43f));
+	ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabHovered, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabActive, ImVec4(0.06f, 0.05f, 0.07f, 1.00f));
+	ImGui::PushStyleColor(ImGuiCol_PlotHistogramHovered, ImVec4(0.25f, 1.00f, 0.00f, 1.00f));
+	// ImGui::PushStyleColor(ImGuiCol_ModalWindowDarkening, ImVec4(1.00f, 0.98f, 0.95f, 0.73f));
+	io.Fonts->AddFontDefault();
+
+}
 
 static void _oglLog(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userData)
 {

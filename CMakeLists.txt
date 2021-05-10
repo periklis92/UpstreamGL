@@ -22,9 +22,5 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_COLOR_MAKEFILE   ON)
 # Include sub-projects.
 
-set(SKIP_PERFORMANCE_COMPARISON ON)
-
-add_subdirectory ("libraries/imgui")
-add_subdirectory ("libraries/cereal")
-add_subdirectory ("libraries/reactphysics3d")
+add_subdirectory("libraries")
 add_subdirectory ("UpstreamGLib")

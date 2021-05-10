@@ -101,7 +101,7 @@ int Application::MainLoop()
 	m_IsRunning = true;
 	assert(m_Window);
 	Director::GetInstance()->GetScene()->Enter();
-	m_LastFrameTime = glfwGetTime();
+	m_LastFrameTime = static_cast<float>(glfwGetTime());
 	while (m_IsRunning)
 	{
 		GLR_PROFILER_START("Update Loop");

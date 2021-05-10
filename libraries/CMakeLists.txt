@@ -1,0 +1,5 @@
+set(SKIP_PERFORMANCE_COMPARISON ON)
+set(BUILD_TESTS OFF)
+add_subdirectory ("imgui")
+add_subdirectory ("cereal")
+add_subdirectory ("reactphysics3d")

@@ -23,11 +23,10 @@ static void _oglLog(uint32_t source, uint32_t type, uint32_t id, uint32_t severi
 
 Application* Application::__AppInstance{nullptr};
 
-Application::Application(const std::string& name, int argc, wchar_t** argv)
+Application::Application(const std::string& name, int argc, char** argv)
 	:m_AppName(name), m_RootPath(), m_Window(nullptr), m_IsRunning(false)
 {
 	m_RootPath = std::filesystem::path(argv[0]).remove_filename();
-	printf("%ls", m_RootPath.c_str());
 	assert(!__AppInstance);
 	__AppInstance = this;
 
@@ -39,6 +38,7 @@ Application::Application(const std::string& name, int argc, wchar_t** argv)
 	m_Scheduler = new Scheduler();
 	m_Console = new Console();
 
+	GLR_LOG("application path: %ls", m_RootPath.c_str());
 	/*if (argc > 1)
 		ParseArgs(argc, argv);*/
 

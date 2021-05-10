@@ -19,10 +19,10 @@ public:
 	File();
 	explicit File(const std::string& path, int mode = Input | Output);
 	void Open(const std::string& path, int mode = Input);
-
+#if WIN32
 	explicit File(const std::wstring& path, int mode = Input);
 	void Open(const std::wstring& path, int mode = Input);
-
+#endif
 	~File();
 
 	bool IsOpen() const;

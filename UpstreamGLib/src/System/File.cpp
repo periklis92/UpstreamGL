@@ -20,7 +20,7 @@ void File::Open(const std::string& path, int mode)
 		printf("Unable to open file: %s", path.c_str());
 	}
 }
-
+#if WIN32
 File::File(const std::wstring& path, int mode)
 {
 	Open(path, mode);
@@ -34,7 +34,7 @@ void File::Open(const std::wstring& path, int mode)
 		printf("Unable to open file: %ls", path.c_str());
 	}
 }
-
+#endif
 File::~File()
 {
 	if (IsOpen())

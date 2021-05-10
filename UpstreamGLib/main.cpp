@@ -123,7 +123,7 @@ int unbound(int)
 class MyApp : public Application
 {
 public:
-	MyApp(int argc, wchar_t** argv)
+	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
 

@@ -19,7 +19,7 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance,_In_opt_ HINSTANCE hPrevInstance,_I
 		WideCharToMultiByte(CP_ACP, 0, w_argv[i], w_len, str[i], len, NULL, NULL);					\
 		str[i][len] = '\0';																			\
 	}																								\
-	AppType app(w_argc, w_argv);																	\
+	AppType app(w_argc, str);																	\
 	delete[] str;																					\
 	return app.MainLoop();																			\
 }																									\

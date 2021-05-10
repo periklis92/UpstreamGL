@@ -13,7 +13,7 @@ struct WindowResizeEvent;
 class Application
 {
 public:
-	Application(const std::string& name, int argc, wchar_t** argv);
+	Application(const std::string& name, int argc, char** argv);
 	virtual ~Application();
 
 	static Application* const GetInstance();

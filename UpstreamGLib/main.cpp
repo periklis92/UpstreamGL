@@ -117,13 +117,14 @@ private:
 
 };
 
+#include <stb/stb_truetype.h>
+
 class MyApp : public Application
 {
 public:
 	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
-
 	}
 
 	Shader shader;	
@@ -158,6 +159,27 @@ public:
 			mesh->SetShader(&shader);
 			mesh->SetMesh(model->GetMesh());
 		}
+
+		
+		File font("./resources/VCR_OSD_MONO.ttf", File::Input | File::Binary);
+		unsigned char* fontBuffer;
+		auto size = font.GetSize();
+		fontBuffer = new uint8_t[size];
+		font.Read(reinterpret_cast<char*>(fontBuffer), size);
+		stbtt_fontinfo fInfo;
+		if (!stbtt_InitFont(&fInfo, fontBuffer, 0))
+		{
+			GLR_LOG_ERROR("Unable to load font");
+			return;
+		}
+		float scale = stbtt_ScaleForPixelHeight(&fInfo, 512);
+		int ax;
+		int lsb;
+        stbtt_GetCodepointHMetrics(&fInfo, 'A', &ax, &lsb);
+		int c_x1, c_y1, c_x2, c_y2;
+        stbtt_GetCodepointBitmapBox(&fInfo, 'A', scale, scale, &c_x1, &c_y1, &c_x2, &c_y2);
+
+
 	}
 
 	float rotation = 0;

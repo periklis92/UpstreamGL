@@ -31,14 +31,12 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/src/**/**/*.cpp)
 
-message(glaaaaaaaad: ${GLAD_INCLUDE_DIR})
-
 include_directories(
-${CMAKE_CURRENT_SOURCE_DIR}/src
-${GLAD_INCLUDE_DIR}
-${IMGUI_INCLUDE_DIR}
-${OPENGL_INCLUDE_DIR} 
-${GLM_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${GLAD_INCLUDE_DIR}
+    ${IMGUI_INCLUDE_DIR}
+    ${OPENGL_INCLUDE_DIR} 
+    ${GLM_INCLUDE_DIR}
 )
 
 set(ASSIMP_BUILD_STATIC_LIB ON)
@@ -56,10 +54,6 @@ enable_testing()
 add_executable (${PROJECT_NAME} ${OPTIONS} "main.cpp" ${GLAD_SOURCE} ${SRC_FILES})
 
 include(CPack)
-
-#add_library(${PROJECT_NAME} STATIC "main.cpp" ${SRC_GLAD} ${SRC_FILES})
-
-
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)

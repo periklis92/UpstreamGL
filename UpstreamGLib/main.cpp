@@ -118,6 +118,10 @@ private:
 };
 
 #include <stb/stb_truetype.h>
+#include <stb/stb_image_write.h>
+
+#include <stb/stb_image.h>
+#include <Graphics/Texture2D.h>
 
 class MyApp : public Application
 {
@@ -125,6 +129,7 @@ public:
 	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
+		
 	}
 
 	Shader shader;	
@@ -167,18 +172,59 @@ public:
 		fontBuffer = new uint8_t[size];
 		font.Read(reinterpret_cast<char*>(fontBuffer), size);
 		stbtt_fontinfo fInfo;
+
 		if (!stbtt_InitFont(&fInfo, fontBuffer, 0))
 		{
 			GLR_LOG_ERROR("Unable to load font");
 			return;
 		}
-		float scale = stbtt_ScaleForPixelHeight(&fInfo, 512);
-		int ax;
-		int lsb;
-        stbtt_GetCodepointHMetrics(&fInfo, 'A', &ax, &lsb);
-		int c_x1, c_y1, c_x2, c_y2;
-        stbtt_GetCodepointBitmapBox(&fInfo, 'A', scale, scale, &c_x1, &c_y1, &c_x2, &c_y2);
 
+		char* word = "Hello Marios!";
+
+		int ascent, descent, lineGap;
+		stbtt_GetFontVMetrics(&fInfo, &ascent, &descent, &lineGap);
+		float scale = stbtt_ScaleForPixelHeight(&fInfo, 64);
+
+		ascent = ceilf(ascent * scale);
+		descent = ceilf(descent * scale);
+		int x = 0, yOffset = 0;
+		int width = 2, height = 2;
+		int avg_size = 16 * ascent;
+		while(width < avg_size)
+		{
+			width = width << 1;
+			height = width;
+		}
+
+		uint8_t* bitmap = new uint8_t[width * height];
+		for (int i = 0; i < 128; ++i)
+		{
+			int ax;
+			int lsb;
+			stbtt_GetCodepointHMetrics(&fInfo, i, &ax, &lsb);
+			int c_x1, c_y1, c_x2, c_y2;
+			stbtt_GetCodepointBitmapBox(&fInfo, i, scale, scale, &c_x1, &c_y1, &c_x2, &c_y2);
+
+			if (x + (c_x2 - c_x1) >= width)
+			{
+				yOffset += ascent;
+				x = 0;
+			}
+
+			int y = ascent + c_y1 + yOffset;
+			int byteOffset = x + ceilf(lsb * scale) + (y * width);
+			stbtt_MakeCodepointBitmap(&fInfo, bitmap + byteOffset, c_x2 - c_x1, c_y2 - c_y1, width, scale, scale, i);
+			x += ceilf(ax * scale);
+
+			int kern;
+			kern = stbtt_GetCodepointKernAdvance(&fInfo, i, i + 1);
+			x += ceilf(kern * scale);
+		}
+
+		stbi_write_png("out.png", width, height, 1, bitmap, width);
+
+		delete[] bitmap;
+		delete[] fontBuffer;
 
 	}
 

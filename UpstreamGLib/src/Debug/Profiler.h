@@ -28,7 +28,7 @@ struct ProfilerMeasurement
 {
 	std::chrono::duration<float> TotalTime{ 0 };
 	std::chrono::duration<float, std::milli> PlotAvg{ 0 };
-	std::chrono::high_resolution_clock::time_point LastStarted{ };
+	std::chrono::system_clock::time_point LastStarted{ };
 	std::uint32_t TimesMeasured{ 0 }, TimesMeasuredPlot{ 0 };
 
 	inline std::chrono::duration<float> AverageTimeSec() const

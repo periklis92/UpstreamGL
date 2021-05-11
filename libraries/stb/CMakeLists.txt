@@ -5,9 +5,10 @@ project("stb")
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(STB_IMPLEMENTATION ${CMAKE_CURRENT_SOURCE_DIR}/src/stb_truetype.c)
+file(GLOB STB_SRC
+${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
 
-add_library(${PROJECT_NAME} STATIC ${STB_IMPLEMENTATION})
+add_library(${PROJECT_NAME} STATIC ${STB_SRC})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

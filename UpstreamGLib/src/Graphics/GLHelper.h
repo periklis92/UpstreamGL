@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdint>
-
 enum class ShaderType
 {
 	Vertex, Fragment

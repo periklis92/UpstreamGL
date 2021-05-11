@@ -1,4 +1,6 @@
 #include "Scheduler.h"
+#include <algorithm>
+
 #include "Debug/Debug.h"
 
 void Scheduler::Update(float deltaTime)
@@ -15,7 +17,7 @@ void Scheduler::Update(float deltaTime)
 		if (it->IsTimeToCall())
 		{
 			it->Callback(it->UserData);
-			it->LastCall = std::chrono::high_resolution_clock::now();
+			it->LastCall = std::chrono::system_clock::now();
 			if (it->CallOnce)
 			{
 				it = m_DelayedCallbacks.erase(it);
@@ -35,7 +37,7 @@ void Scheduler::Register(const DelayedDelegate& delayedDelegate, void* userData,
 {
 	DelayedCallback callback
 	{
-		delayedDelegate, userData, std::chrono::duration<float>(intervalSeconds), callOnce, std::chrono::high_resolution_clock::now()
+		delayedDelegate, userData, std::chrono::duration<double>{intervalSeconds}, callOnce, std::chrono::system_clock::now()
 	};
 
 	m_DelayedCallbacks.push_back(callback);

@@ -11,13 +11,13 @@ struct DelayedCallback
 {
 	DelayedDelegate Callback{};
 	void* UserData = nullptr;
-	std::chrono::duration<float, std::ratio<1>> Interval;
+	std::chrono::duration<double> Interval;
 	bool CallOnce = true;
-	std::chrono::high_resolution_clock::time_point LastCall;
+	std::chrono::system_clock::time_point LastCall;
 
 	inline bool IsTimeToCall() const
 	{
-		return (std::chrono::high_resolution_clock::now() >= LastCall + Interval);
+		return (std::chrono::system_clock::now() >= LastCall + Interval);
 	}
 
 	inline bool operator==(const DelayedDelegate& other) const

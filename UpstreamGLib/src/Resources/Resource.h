@@ -48,7 +48,8 @@ public:
     ResourceType* operator->() { return m_ResourceData; }
     ResourceType& operator*() { return *m_ResourceData; }
     bool operator!() { return !IsLoaded(); }
-
+    bool operator==(const Resource& other) { return m_ResourceData == other.m_ResourceData; }
+    
 protected:
     std::string m_Name;
     std::filesystem::path m_Path;

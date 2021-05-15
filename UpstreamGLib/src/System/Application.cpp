@@ -111,7 +111,7 @@ int Application::MainLoop()
 
 		Render();
 
-		GLR_PROFILER_START("Gui");
+		GLR_PROFILER_START("ImGui");
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -231,7 +231,7 @@ void Application::__InitImGui()
 	ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabHovered, ImVec4(0.56f, 0.56f, 0.58f, 1.00f));
 	ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabActive, ImVec4(0.06f, 0.05f, 0.07f, 1.00f));
 	ImGui::PushStyleColor(ImGuiCol_PlotHistogramHovered, ImVec4(0.25f, 1.00f, 0.00f, 1.00f));
-	// ImGui::PushStyleColor(ImGuiCol_ModalWindowDarkening, ImVec4(1.00f, 0.98f, 0.95f, 0.73f));
+	
 	io.Fonts->AddFontDefault();
 
 }

@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include <algorithm>
+#include "Components/Camera.h"
 
 void Scene::Unload()
 {
@@ -12,7 +13,14 @@ void Scene::Unload()
 
 Node& Scene::CreateNode(const std::string& name)
 {
-    return *m_Nodes.emplace(name, new Node(name)).first->second;
+    auto& node = *m_Nodes.emplace(name, new Node(name)).first->second;
+    node.AddComponent<Transform>();
+    return node;
+}
+
+void Scene::Enter()
+{
+    for (auto& n: m_Nodes ) n.second->OnEnter();
 }
 
 Node& Scene::GetNode(const std::string& name)

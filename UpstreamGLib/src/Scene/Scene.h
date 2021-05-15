@@ -18,11 +18,16 @@ public:
     NodeContainer::iterator FindNode(const std::string& name);
     void SetMainCamera(Camera* camera);
     Camera* GetMainCamera();
-    void Enter() { for (auto& n: m_Nodes ) { n.second->OnEnter();} }
-    void Exit() { for (auto& n: m_Nodes ) { n.second->OnExit();} }
+    
+    void Enter();
+
+    void Exit() 
+    { 
+        for (auto& n: m_Nodes ) n.second->OnExit(); 
+    }
 
 private:
     NodeContainer m_Nodes;
     Camera* m_MainCamera{nullptr};
-    
+        
 };

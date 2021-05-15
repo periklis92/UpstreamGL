@@ -2,7 +2,6 @@
 Node::Node(const std::string& name)
 	:m_Name(name)
 {
-	AddComponent<Transform>();
 }
 
 Node::~Node()

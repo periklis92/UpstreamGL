@@ -4,19 +4,13 @@
 #include "Scene/Node.h"
 #include "System/Scheduler.h"
 #include "Transform.h"
-Camera::Camera(Node* node, CameraSettings settings)
-    : Component(node), m_CameraSettings(settings) 
+Camera::Camera(Node* node)
+    : Component(node)
 {
     Application::GetInstance()->GetWindow()->OnWindowResize() += 
         EventDelegate<WindowResizeEvent>{ ConnectFunc<&Camera::__WindowResizeCallback>, this };
 
-    int width = 0, height = 0;
-    Application::GetInstance()->GetWindow()->GetSize(width, height);
-
     Application::GetInstance()->GetScheduler()->Register(UpdateDelegate{ConnectFunc<&Camera::__Update>, this});
-
-    m_ProjectionMatrix = 
-        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), (float)width / (float)height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
 }
 
 glm::mat4 Camera::GetProjectionMatrix() const
@@ -133,9 +127,6 @@ bool Camera::IsInFrustum(glm::vec3 pos, glm::vec3 size) const
 
 bool Camera::__WindowResizeCallback(const WindowResizeEvent* e)
 {
-    m_ProjectionMatrix = 
-        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), 
-        (float)e->Width / (float)e->Height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
     return true;
 }
 
@@ -143,4 +134,38 @@ void Camera::__Update(float deltaTime)
 {
     CalculateViewMatrix();
     CalculateFrustumPlanes();
+}
+
+PerspectiveCamera::PerspectiveCamera(Node* node, PerspectiveCameraSettings settings)
+    :Camera(node), m_CameraSettings(settings)
+{
+    int width = 0, height = 0;
+    Application::GetInstance()->GetWindow()->GetSize(width, height);
+
+    m_ProjectionMatrix = 
+        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), (float)width / (float)height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
+}
+
+bool PerspectiveCamera::__WindowResizeCallback(const WindowResizeEvent* e)
+{
+    m_ProjectionMatrix = 
+        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), 
+        (float)e->Width / (float)e->Height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
+    return true;
+}
+
+
+OrthoCamera::OrthoCamera(Node* node, OrthoCameraSettings settings)
+    :Camera(node), m_CameraSettings(settings)
+{
+
+}
+
+bool OrthoCamera::__WindowResizeCallback(const WindowResizeEvent* e)
+{
+    float aspectRatio = e->Width / e->Height;
+    float height = m_CameraSettings.size * aspectRatio;
+    m_ProjectionMatrix = 
+        glm::ortho(-m_CameraSettings.size / 2.f, m_CameraSettings.size / 2.f, height / 2.f,  -height / 2.f);
+    return true;
 }

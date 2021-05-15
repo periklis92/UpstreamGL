@@ -32,9 +32,6 @@
 #include "Resources/MeshResource.h"
 #include "Resources/AnimationResource.h"
 #include "Components/Camera.h"
-// #include "stb/stb_truetype.h"
-#include "Components/GUI/Image.h"
-#include "Components/GUI/RectTransform.h"
 
 class CameraController
 	: public Component
@@ -152,11 +149,9 @@ public:
 			.AddShader(fragShader.ToString().c_str(), ShaderType::Fragment)
 			.Build();
 
-		// RectTransform rect(nullptr);
-
 		ComponentRegistry::RegisterComponent<Mesh>("mesh");
 		auto& cameraNode = Director::GetInstance()->GetScene()->CreateNode("camera");
-		cameraNode.AddComponent<Camera>();
+		cameraNode.AddComponent<PerspectiveCamera>();
 		cameraNode.AddComponent<CameraController>();
 		auto transform = cameraNode.GetTransform();
 		transform->SetLocalPosition(glm::vec3(0, 0, 0));

@@ -28,7 +28,7 @@ public:
 	Armature* GetArmature() const { return m_Armature; }
 	size_t GetNumIndices() { return m_NumIndices; }
 
-	const AABB GetAABB() const { return m_AABB; }
+	const AABB GetBounds() const { return m_AABB; }
 	bool IsSkinned() const { return m_Armature != nullptr; }
 
 	void Bind();

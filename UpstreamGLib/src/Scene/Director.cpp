@@ -10,3 +10,7 @@ MeshRenderer& Director::GetMeshRenderer()
 {
     return m_MeshRenderer;
 }
+GUIRenderer& Director::GetGuiRenderer()
+{
+    return m_GUIRenderer;
+}

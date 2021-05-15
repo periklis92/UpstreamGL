@@ -24,6 +24,7 @@ public:
             if (it.second)
                 delete it.second;
         }
+        m_Components.clear();
     }
 
     // template<class T, class...Args>
@@ -49,8 +50,7 @@ public:
     }
 
     template<class T>
-    auto HasComponent() { return m_Components.find(typeid(T)) != m_Components.end(); }
-    
+    auto HasComponent() { return m_Components.find(typeid(T)) != m_Components.end(); }    
     
     template<class T>
     auto GetComponent() { if (HasComponent<T>()) return dynamic_cast<T*>(m_Components.find(typeid(T))->second); return static_cast<T*>(nullptr); }

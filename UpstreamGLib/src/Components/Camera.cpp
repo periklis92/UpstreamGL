@@ -3,7 +3,7 @@
 #include "System/Window.h"
 #include "Scene/Node.h"
 #include "System/Scheduler.h"
-
+#include "Transform.h"
 Camera::Camera(Node* node, CameraSettings settings)
     : Component(node), m_CameraSettings(settings) 
 {
@@ -31,7 +31,8 @@ glm::mat4 Camera::GetViewMatrix() const
 
 void Camera::CalculateViewMatrix()
 {
-    m_ViewMatrix = glm::lookAt(m_Node->GetWorldPosition(), m_Node->GetWorldPosition() + m_Node->GetForwardDirection(), m_Node->GetUpDirection());
+    auto transform = m_Node->GetComponent<Transform>();
+    m_ViewMatrix = glm::lookAt(transform->GetWorldPosition(), transform->GetWorldPosition() + transform->GetForwardDirection(), transform->GetUpDirection());
 }
 
 void Camera::CalculateFrustumPlanes()

@@ -15,6 +15,8 @@ find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp CONFIG REQUIRED)
 
+find_path(RAPIDXML_INCLUDE_DIRS "rapidxml/rapidxml.hpp")
+
 # if (NOT ASSIMP_FOUND)
 #     message( SEND_ERROR "ASSIMP NOT FOUND!" )
 # endif()
@@ -68,6 +70,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL imgui glfw cereal reactphysics3d stb)
+target_include_directories(${PROJECT_NAME} PRIVATE ${RAPIDXML_INCLUDE_DIRS})
 
 set(${PROJECT_NAME}_RESOURCE_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/resources

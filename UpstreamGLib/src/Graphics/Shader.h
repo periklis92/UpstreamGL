@@ -23,6 +23,9 @@ public:
 	Shader& operator=(const Shader&) = delete;
 	~Shader();
 
+	bool operator==(const Shader& other) { return m_ProgramId == other.m_ProgramId; }
+	bool operator==(const Shader* other) { return m_ProgramId == other->m_ProgramId; }
+
 	void Bind();
 
 	void SetMat4(const char* name, const glm::mat4& matrix);

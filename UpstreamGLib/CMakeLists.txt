@@ -59,7 +59,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
 target_link_libraries(${PROJECT_NAME} PRIVATE debug ${ASSIMP_LIB})
 else()
-add_definitions(-DGLR_PROFILE -DGLR_DEBUG)
+add_definitions(-DGLR_PROFILE)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${ASSIMP_LIB})
 endif()
 

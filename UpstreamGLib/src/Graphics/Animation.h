@@ -74,3 +74,16 @@ private:
 	float m_Duration;
 	float m_TicksPerSecond;
 };
+
+class Animation
+{
+public:
+	Animation() = default;
+	~Animation() = default;
+
+	std::map<std::string, AnimationClip>& GetClips() { return m_Clips; }
+	void AddClip(const std::string& name, AnimationClip&& clip);
+	void Clear() { m_Clips.clear(); }
+private:
+	std::map<std::string, AnimationClip> m_Clips{};
+};

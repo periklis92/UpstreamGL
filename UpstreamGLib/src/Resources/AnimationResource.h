@@ -10,24 +10,19 @@ struct aiScene;
 class AnimationClip;
 
 class AnimationResource
-    : public Resource
+    : public Resource<Animation>
 {
 public:
     AnimationResource(const std::string& name, const std::filesystem::path& path)
-        :Resource(name, path) { Reload(); }
+        :Resource(name, path) { Load(); }
 
-    virtual void Reload() override;
+    virtual void Load() override;
     virtual void Unload() override;
     virtual void Destroy() override;
 
-    virtual bool IsLoaded() const override { return m_Clips.size() > 0; }
-
-    size_t GetNumClips() const { return m_Clips.size(); }
-    const std::vector<AnimationClip>& GetClips() const { return m_Clips; }
+    virtual bool IsLoaded() const override { return m_ResourceData; }
 
 private:    
     void LoadAnimations(const aiScene* scene);
 
-private:
-    std::vector<AnimationClip> m_Clips;
 };

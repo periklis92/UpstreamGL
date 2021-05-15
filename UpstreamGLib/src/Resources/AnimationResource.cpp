@@ -8,7 +8,7 @@
 #include "Math/AssimpGLMHelper.h"
 #include "Debug/Debug.h"
 
-void AnimationResource::Reload()
+void AnimationResource::Load()
 {
     GLR_LOG("Loading Animation: %s", m_Name.c_str());
     Unload();
@@ -16,24 +16,25 @@ void AnimationResource::Reload()
     const aiScene* scene = importer.ReadFile(m_Path.generic_u8string(), 0);
     
     assert(scene);
-
+    
     LoadAnimations(scene);
-}
-
-void AnimationResource::Unload()
-{
-    m_Clips.clear();
 }
 
 void AnimationResource::Destroy()
 {
-    Unload();
+    delete m_ResourceData;
+}
+
+
+void AnimationResource::Unload()
+{
+    m_ResourceData->Clear();
 }
 
 void AnimationResource::LoadAnimations(const aiScene* scene)
 {
     for (uint32_t i = 0; i < scene->mNumAnimations; ++i)
     {
-        m_Clips.emplace_back(scene->mAnimations[i]->mName.C_Str(), scene->mAnimations[i]);
+        m_ResourceData->AddClip(scene->mAnimations[i]->mName.C_Str(), AnimationClip(scene->mAnimations[i]->mName.C_Str(), scene->mAnimations[i]));
     }
 }

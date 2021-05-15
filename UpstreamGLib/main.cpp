@@ -33,6 +33,8 @@
 #include "Resources/AnimationResource.h"
 #include "Components/Camera.h"
 // #include "stb/stb_truetype.h"
+#include "Components/GUI/Image.h"
+#include "Components/GUI/RectTransform.h"
 
 class CameraController
 	: public Component
@@ -54,15 +56,16 @@ public:
 
 	void update(float deltaTime)
 	{
-		m_Node->Translate(m_Node->GetForwardDirection() * MoveAxis.y * deltaTime * MoveSpeed);
-		m_Node->Translate(m_Node->GetRightDirection() * MoveAxis.x * deltaTime * MoveSpeed);
+		auto transform = m_Node->GetTransform();
+		transform->Translate(transform->GetForwardDirection() * MoveAxis.y * deltaTime * MoveSpeed);
+		transform->Translate(transform->GetRightDirection() * MoveAxis.x * deltaTime * MoveSpeed);
 		
 		auto frameRot = RotateAxis * deltaTime * RotateSpeed;
 		RotateAxis -= frameRot;
 		if (glm::length(RotateAxis) < .2f)
 			RotateAxis = glm::vec2{0.f, 0.f};
-		m_Node->Rotate(frameRot.x, glm::vec3{0.f, 1.f, 0.f});
-		m_Node->Rotate(frameRot.y, m_Node->GetRightDirection());
+		transform->Rotate(frameRot.x, glm::vec3{0.f, 1.f, 0.f});
+		transform->Rotate(frameRot.y, transform->GetRightDirection());
 	}
 
 	const std::string GetComponentName() const override
@@ -121,7 +124,7 @@ private:
 #include <stb/stb_image_write.h>
 
 #include <stb/stb_image.h>
-#include <Graphics/Texture2D.h>
+#include <Graphics/Quad.h>
 
 class MyApp : public Application
 {
@@ -129,12 +132,11 @@ public:
 	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
-		
+		Quad q({1.f, 1.f});
 	}
 
 	Shader shader;	
-	MeshResource*		 model;
-	AnimationResource* 	anim;
+	AnimationResource* anim;
 	float animTime = 0.f;
 	Mesh* mesh;
 	
@@ -150,19 +152,24 @@ public:
 			.AddShader(fragShader.ToString().c_str(), ShaderType::Fragment)
 			.Build();
 
+		// RectTransform rect(nullptr);
+
 		ComponentRegistry::RegisterComponent<Mesh>("mesh");
 		auto& cameraNode = Director::GetInstance()->GetScene()->CreateNode("camera");
 		cameraNode.AddComponent<Camera>();
 		cameraNode.AddComponent<CameraController>();
-		cameraNode.SetLocalPosition(glm::vec3(0, 0, 0));
- 		model = new MeshResource("cube", "./resources/Cube.fbx");
+		auto transform = cameraNode.GetTransform();
+		transform->SetLocalPosition(glm::vec3(0, 0, 0));
+		MeshResource model("cube", "./resources/Cube.fbx");
+
 		for (int i = 0; i < 20; ++i)
 		{
 			auto& cube = Director::GetInstance()->GetScene()->CreateNode("cube " + std::to_string(i));
-			cube.SetLocalPosition(glm::vec3{-20.f + i * 2.f, 0, 0});
+			auto cubetransform = cube.GetTransform();
+			cubetransform->SetLocalPosition(glm::vec3{-20.f + i * 2.f, 0, 0});
 			mesh = dynamic_cast<Mesh*>(cube.AddComponent("mesh"));
 			mesh->SetShader(&shader);
-			mesh->SetMesh(model->GetMesh());
+			mesh->SetMesh(model);
 		}
 
 		
@@ -179,11 +186,9 @@ public:
 			return;
 		}
 
-		char* word = "Hello Marios!";
-
 		int ascent, descent, lineGap;
 		stbtt_GetFontVMetrics(&fInfo, &ascent, &descent, &lineGap);
-		float scale = stbtt_ScaleForPixelHeight(&fInfo, 64);
+		float scale = stbtt_ScaleForPixelHeight(&fInfo, 24);
 
 		ascent = ceilf(ascent * scale);
 		descent = ceilf(descent * scale);
@@ -197,6 +202,7 @@ public:
 		}
 
 		uint8_t* bitmap = new uint8_t[width * height];
+		memset(bitmap, 0, width * height);
 		for (int i = 0; i < 128; ++i)
 		{
 			int ax;
@@ -250,14 +256,15 @@ public:
 	{
 		Application::OnGui();
 		auto& cameraNode = Director::GetInstance()->GetScene()->GetNode("camera");
-		auto pos = cameraNode.GetWorldPosition();
+		auto transform = cameraNode.GetTransform();
+		auto pos = transform->GetWorldPosition();
 		ImGui::Begin("Camera Info", nullptr);
 		ImGui::Text("Position:");
 		ImGui::Text("Pos X: %.02f", pos.x);
 		ImGui::Text("Pos Y: %.02f", pos.y);
 		ImGui::Text("Pos Z: %.02f", pos.z);
 		ImGui::Separator();
-		auto rot = glm::degrees(cameraNode.GetWorldRotation());
+		auto rot = glm::degrees(transform->GetWorldRotation());
 		ImGui::Text("Rotation:");
 		ImGui::Text("Euler X: %.02f", rot.x);
 		ImGui::Text("Euler Y: %.02f", rot.y);

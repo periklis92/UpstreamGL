@@ -158,3 +158,8 @@ const std::map<std::string, glm::mat4> AnimationClip::GetChannelsTransforms(floa
 	}
 	return ret;
 }
+
+void Animation::AddClip(const std::string& name, AnimationClip&& clip)
+{
+	m_Clips.emplace(name, std::move(clip));
+}

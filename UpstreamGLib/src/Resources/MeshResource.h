@@ -10,24 +10,21 @@ struct aiMesh;
 class Armature;
 
 class MeshResource
-    : public Resource
+    : public Resource<MeshData>
 {
 public:
     MeshResource(const std::string& name, const std::filesystem::path& path, uint32_t indexInScene = 0)
-        :Resource(name, path), m_Mesh(nullptr), m_IndexInScene(indexInScene) { Reload(); }
-
-    MeshResource(MeshResource&& other);
-    MeshResource& operator=(MeshResource&& other);
+        :Resource(name, path), m_IndexInScene(indexInScene) { Load(); }
+    MeshResource(): Resource() {  }
+    // MeshResource(MeshResource&& other);
+    // MeshResource& operator=(MeshResource&& other);
     virtual ~MeshResource();
 
-    virtual void Reload() override;
+    virtual void Load() override;
     virtual void Unload() override;
     virtual void Destroy() override;
     
-    virtual bool IsLoaded() const override { return m_Mesh != nullptr; }
-
-    const MeshData* GetMesh() const { return m_Mesh; }
-    MeshData* GetMesh() { return m_Mesh; }
+    virtual bool IsLoaded() const override { return m_ResourceData != nullptr; }
 
 private:
     void LoadSimpleMesh(const aiMesh* mesh);
@@ -35,6 +32,5 @@ private:
     void LoadMeshes(const aiScene* scene);
 
 private:
-    MeshData* m_Mesh;
     uint32_t m_IndexInScene;
 };

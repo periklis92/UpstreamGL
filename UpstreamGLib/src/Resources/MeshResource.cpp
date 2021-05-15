@@ -9,7 +9,7 @@
 #include "Math/AssimpGLMHelper.h"
 #include "Debug/Debug.h"
 
-void MeshResource::Reload()
+void MeshResource::Load()
 {
 	GLR_LOG("Loading mesh: %s", m_Name.c_str());
     Unload();
@@ -27,37 +27,35 @@ void MeshResource::Reload()
     LoadMeshes(scene);
 }
 
-MeshResource::MeshResource(MeshResource&& other)
-	:Resource(std::move(other))
-{
-	*this = std::move(other);
-}
+// MeshResource::MeshResource(MeshResource&& other)
+// 	:Resource(std::move(other))
+// {
+// 	*this = std::move(other);
+// }
 
-MeshResource& MeshResource::operator=(MeshResource&& other)
-{
-	m_Name = other.m_Name;
-	m_Path = other.m_Path;
+// MeshResource& MeshResource::operator=(MeshResource&& other)
+// {
+// 	m_Name = other.m_Name;
+// 	m_Path = other.m_Path;
 
-	m_Mesh = other.m_Mesh;
-	m_IndexInScene = other.m_IndexInScene;
-	return *this;
-}
+// 	m_ResourceData = other.m_ResourceData;
+// 	m_IndexInScene = other.m_IndexInScene;
+// 	return *this;
+// }
 
 MeshResource::~MeshResource()
 {
-	if (m_Mesh)
-    	delete m_Mesh;
 }
 
 void MeshResource::Unload()
 {
-	if (m_Mesh)
-    	delete m_Mesh;
+	
 }
 
 void MeshResource::Destroy()
 {
-    Unload();
+	if (m_ResourceData)
+    	delete m_ResourceData;
 }
 
 void MeshResource::LoadSimpleMesh(const aiMesh* mesh)
@@ -91,7 +89,7 @@ void MeshResource::LoadSimpleMesh(const aiMesh* mesh)
 		for (uint32_t j = 0; j < mesh->mFaces[i].mNumIndices; ++j)
 			indices.push_back(mesh->mFaces[i].mIndices[j]);
 
-    m_Mesh = new MeshData(vertices, indices, mesh->mAABB);
+    m_ResourceData = new MeshData(vertices, indices, mesh->mAABB);
 }
 
 void MeshResource::LoadSkinnedMesh(const aiMesh* mesh, Armature* armature)
@@ -134,7 +132,7 @@ void MeshResource::LoadSkinnedMesh(const aiMesh* mesh, Armature* armature)
 		for (uint32_t j = 0; j < mesh->mFaces[i].mNumIndices; ++j)
 			indices.push_back(mesh->mFaces[i].mIndices[j]);
 
-    m_Mesh = new MeshData(vertices, indices, mesh->mAABB, armature);
+    m_ResourceData = new MeshData(vertices, indices, mesh->mAABB, armature);
 }
 
 void MeshResource::LoadMeshes(const aiScene* scene)

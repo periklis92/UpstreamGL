@@ -34,6 +34,6 @@ void main()
 		vec3 localnormal = mat3(_BoneTransforms[int(boneIds[i])]) * normal;
 		norm = localnormal;
 	}
-
+	
 	gl_Position = _ModelViewProjection * finalPosition;
 }

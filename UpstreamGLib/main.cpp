@@ -33,22 +33,24 @@
 #include "Resources/AnimationResource.h"
 #include "Components/Camera.h"
 
+typedef glm::vec2 Vector2 ;
+
 class CameraController
 	: public Component
 {
-	glm::vec2 MoveAxis{0.f};
+	Vector2 MoveAxis{0.f};
 	glm::vec2 RotateAxis{0.f};
 	bool IsRotating{false};
-	float MoveSpeed{4.f};
 	float RotateSpeed{6.5f};
 public:
+	float MoveSpeed = 4.f;
 	CameraController(Node* node)
 	:Component(node) 
 	{
 		InputManager::GetInstance()->OnKeyboardKey() += InputKeyboardDelegate{ ConnectFunc<&CameraController::keyPressedCb>, this};
 		InputManager::GetInstance()->OnMouseMove() += InputMouseMoveDelegate{ ConnectFunc<&CameraController::mouseMoveCb>, this};
 		InputManager::GetInstance()->OnMouseButton() += InputMouseButtonDelegate{ ConnectFunc<&CameraController::mousePressCb>, this};
-		Application::GetInstance()->GetScheduler()->Register(UpdateDelegate{ ConnectFunc<&CameraController::update>, this} );
+		Application::GetInstance()->GetScheduler()->RegisterUpdate(UpdateDelegate{ ConnectFunc<&CameraController::update>, this} );
 	}
 
 	void update(float deltaTime)
@@ -150,6 +152,7 @@ public:
 			.Build();
 
 		ComponentRegistry::RegisterComponent<Mesh>("mesh");
+
 		auto& cameraNode = Director::GetInstance()->GetScene()->CreateNode("camera");
 		cameraNode.AddComponent<PerspectiveCamera>();
 		cameraNode.AddComponent<CameraController>();
@@ -216,7 +219,7 @@ public:
 			int byteOffset = x + ceilf(lsb * scale) + (y * width);
 			stbtt_MakeCodepointBitmap(&fInfo, bitmap + byteOffset, c_x2 - c_x1, c_y2 - c_y1, width, scale, scale, i);
 			x += ceilf(ax * scale);
-
+			
 			int kern;
 			kern = stbtt_GetCodepointKernAdvance(&fInfo, i, i + 1);
 			x += ceilf(kern * scale);

@@ -10,7 +10,7 @@ Camera::Camera(Node* node)
     Application::GetInstance()->GetWindow()->OnWindowResize() += 
         EventDelegate<WindowResizeEvent>{ ConnectFunc<&Camera::__WindowResizeCallback>, this };
 
-    Application::GetInstance()->GetScheduler()->Register(UpdateDelegate{ConnectFunc<&Camera::__Update>, this});
+    Application::GetInstance()->GetScheduler()->RegisterUpdate(UpdateDelegate{ConnectFunc<&Camera::__Update>, this});
 }
 
 glm::mat4 Camera::GetProjectionMatrix() const

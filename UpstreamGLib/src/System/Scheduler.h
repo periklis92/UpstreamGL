@@ -35,10 +35,10 @@ public:
 	~Scheduler() = default;
 
 	void Update(float deltaTime);
-	void Register(const UpdateDelegate& updateDelegate);
-	void Register(const DelayedDelegate& delayedDelegate, void* userData, float intervalSeconds, bool callOnce = true);
-	void Unregister(const UpdateDelegate& updateDelegate);
-	void Unregister(const DelayedDelegate& updateDelegate);
+	void RegisterUpdate(const UpdateDelegate& updateDelegate);
+	void RegisterDelayed(const DelayedDelegate& delayedDelegate, void* userData, float intervalSeconds, bool callOnce = true);
+	void UnregisterUpdate(const UpdateDelegate& updateDelegate);
+	void UnregisterDelayed(const DelayedDelegate& updateDelegate);
 
 private:
 	std::list<UpdateDelegate> m_RegisteredUpdates;

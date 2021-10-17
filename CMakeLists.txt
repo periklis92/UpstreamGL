@@ -1,7 +1,4 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
 if (WIN32)
   set(CMAKE_SHARED_LIBRARY_PREFIX "")
@@ -23,4 +20,4 @@ set(CMAKE_COLOR_MAKEFILE   ON)
 # Include sub-projects.
 
 add_subdirectory("libraries")
-add_subdirectory ("UpstreamGLib")
+add_subdirectory("UpstreamGLib")

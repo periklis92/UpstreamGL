@@ -28,12 +28,12 @@ void Scheduler::Update(float deltaTime)
 	}
 }
 
-void Scheduler::Register(const UpdateDelegate& updateDelegate)
+void Scheduler::RegisterUpdate(const UpdateDelegate& updateDelegate)
 {
 	m_RegisteredUpdates.push_back(updateDelegate);
 }
 
-void Scheduler::Register(const DelayedDelegate& delayedDelegate, void* userData, float intervalSeconds, bool callOnce)
+void Scheduler::RegisterDelayed(const DelayedDelegate& delayedDelegate, void* userData, float intervalSeconds, bool callOnce)
 {
 	DelayedCallback callback
 	{
@@ -43,12 +43,12 @@ void Scheduler::Register(const DelayedDelegate& delayedDelegate, void* userData,
 	m_DelayedCallbacks.push_back(callback);
 }
 
-void Scheduler::Unregister(const UpdateDelegate& updateDelegate)
+void Scheduler::UnregisterUpdate(const UpdateDelegate& updateDelegate)
 {
 	m_RegisteredUpdates.remove(updateDelegate);
 }
 
-void Scheduler::Unregister(const DelayedDelegate& updateDelegate)
+void Scheduler::UnregisterDelayed(const DelayedDelegate& updateDelegate)
 {
 	auto it = std::find(m_DelayedCallbacks.begin(), m_DelayedCallbacks.end(), updateDelegate);
 	m_DelayedCallbacks.erase(it);

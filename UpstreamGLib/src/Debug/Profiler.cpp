@@ -11,7 +11,7 @@
 
 Profiler::Profiler()
 {
-	Application::GetInstance()->GetScheduler()->Register(
+	Application::GetInstance()->GetScheduler()->RegisterDelayed(
 		DelayedDelegate{ ConnectFunc<&Profiler::__PlotUpdater>, this }, nullptr, GLR_PROFILER_PLOT_INTERVAL_SECS, false);
 	
 	InputManager::GetInstance()->OnKeyboardKey() += InputKeyboardDelegate{ ConnectFunc<&Profiler::__ProfilerToggle>, this };

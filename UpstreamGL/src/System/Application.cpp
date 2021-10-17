@@ -7,7 +7,6 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <fstream>
-#include <UpstreamGL/System/Window.h>
 #include <UpstreamGL/System/File.h>
 #include <UpstreamGL/Debug/Profiler.h>
 #include <UpstreamGL/System/Scheduler.h>
@@ -39,7 +38,7 @@ Application::Application(const std::string& name, int argc, char** argv)
 	m_Scheduler = new Scheduler();
 	m_Console = new Console();
 
-	GLR_LOG("application path: %ls", m_RootPath.c_str());
+	UPGL_LOG("application path: %ls", m_RootPath.c_str());
 	/*if (argc > 1)
 		ParseArgs(argc, argv);*/
 
@@ -77,12 +76,12 @@ void Application::OnGui()
 {
 	if (m_Console)
 		m_Console->Draw();
-	GLR_PROFILER_DRAW();
+	UPGL_PROFILER_DRAW();
 }
 
 void Application::OnExit()
 {
-	GLR_PROFILER_EXPORT_FILE("ProfilerResults.txt");
+	UPGL_PROFILER_EXPORT_FILE("ProfilerResults.txt");
 }
 
 int Application::MainLoop()
@@ -99,8 +98,8 @@ int Application::MainLoop()
 	m_LastFrameTime = static_cast<float>(glfwGetTime());
 	while (m_IsRunning)
 	{
-		GLR_PROFILER_START("Main Loop");
-		GLR_PROFILER_START("Update Loop");
+		UPGL_PROFILER_START("Main Loop");
+		UPGL_PROFILER_START("Update Loop");
 
 		float currentTime = static_cast<float>(glfwGetTime());
 		m_DeltaTime = currentTime - m_LastFrameTime;
@@ -108,11 +107,11 @@ int Application::MainLoop()
 		m_Scheduler->Update(m_DeltaTime);
 		OnTick(m_DeltaTime);
 
-		GLR_PROFILER_END();
+		UPGL_PROFILER_END();
 
 		Render();
 
-		GLR_PROFILER_START("ImGui");
+		UPGL_PROFILER_START("ImGui");
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -121,10 +120,10 @@ int Application::MainLoop()
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		GLR_PROFILER_END();
+		UPGL_PROFILER_END();
 
 		m_Window->Update();
-		GLR_PROFILER_END();
+		UPGL_PROFILER_END();
 	}
 	OnExit();
 	return 0;
@@ -132,7 +131,7 @@ int Application::MainLoop()
 
 int Application::Render()
 {
-	GLR_PROFILER_START("Render Loop");
+	UPGL_PROFILER_START("Render Loop");
 	
 	glClearColor(.2f, .4f, .8f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -140,14 +139,14 @@ int Application::Render()
 	Camera* camera = Director::GetInstance()->GetScene()->GetMainCamera();
 	if (!camera)
 	{
-		GLR_LOG_ERROR("Renderer: No camera found!");
-		GLR_PROFILER_END();
+		UPGL_LOG_ERROR("Renderer: No camera found!");
+		UPGL_PROFILER_END();
 		return 1;
 	}
 
 	Director::GetInstance()->GetMeshRenderer().Render(camera);
 
-	GLR_PROFILER_END();
+	UPGL_PROFILER_END();
 	return 0;	
 }
 

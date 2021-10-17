@@ -3,12 +3,11 @@
 #include <string>
 #include <filesystem>
 
-class Window;
+#include <UpstreamGL/System/Window.h>
+
 class Logger;
 class Console;
 class Scheduler;
-struct WindowCloseEvent;
-struct WindowResizeEvent;
 
 class Application
 {
@@ -24,6 +23,7 @@ public:
 	Console* GetConsole() const { return m_Console; }
 	Scheduler* GetScheduler() const { return m_Scheduler; }
 	float GetLastDeltaTime() const { return m_DeltaTime; }
+	void Quit() { m_Window->Close(); m_IsRunning = false; }
 
 	int MainLoop();
 	int Render();

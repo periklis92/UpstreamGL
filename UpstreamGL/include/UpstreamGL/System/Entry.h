@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include <shellapi.h>
 
-#define GLR_APP_IMPL(AppType)																		\
+#define UPGL_APP_IMPL(AppType)																		\
 INT WINAPI wWinMain(_In_ HINSTANCE hInstance,_In_opt_ HINSTANCE hPrevInstance,_In_ LPWSTR,_In_ INT)	\
 {																									\
 	int w_argc = 0;																					\
@@ -25,7 +25,7 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance,_In_opt_ HINSTANCE hPrevInstance,_I
 }																									\
 
 #else
-#define GLR_APP_IMPL(AppType)							\
+#define UPGL_APP_IMPL(AppType)							\
 int main(int argc, char* argv[])						\
 {														\
 	AppType app(argc, argv);							\

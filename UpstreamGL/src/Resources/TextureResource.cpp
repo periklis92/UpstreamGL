@@ -11,7 +11,7 @@ void TextureResource::Load()
 
     if (!data)
     {
-        GLR_LOG_ERROR("Unable to load texture %s", m_Path.string().c_str());
+        UPGL_LOG_ERROR("Unable to load texture %s", m_Path.string().c_str());
         return;
     }
         

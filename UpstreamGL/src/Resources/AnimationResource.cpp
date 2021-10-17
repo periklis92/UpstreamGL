@@ -10,7 +10,7 @@
 
 void AnimationResource::Load()
 {
-    GLR_LOG("Loading Animation: %s", m_Name.c_str());
+    UPGL_LOG("Loading Animation: %s", m_Name.c_str());
     Unload();
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(m_Path.generic_u8string(), 0);

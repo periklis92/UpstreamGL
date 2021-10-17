@@ -22,8 +22,8 @@ struct BoneWeight
 
 struct VertexWeight
 {
-	int BoneIds[GLR_MAX_BONES_PER_VERTEX];
-	float Weight[GLR_MAX_BONES_PER_VERTEX];
+	int BoneIds[UPGL_MAX_BONES_PER_VERTEX];
+	float Weight[UPGL_MAX_BONES_PER_VERTEX];
 	uint32_t NumBones = 0;
 };
 

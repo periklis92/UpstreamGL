@@ -30,7 +30,7 @@ enum class MouseButton : uint32_t
 struct InputKeyboardEvent
 	: public Event
 {
-	GLR_IMPL_EVT_BODY(InputKeyboardEvent);
+	UPGL_IMPL_EVT_BODY(InputKeyboardEvent);
 	InputKeyboardEvent(KeyboardKey key, bool isPressed)
 		:Key(key), IsPressed(isPressed) {}
 
@@ -41,7 +41,7 @@ struct InputKeyboardEvent
 struct InputMouseButtonEvent
 	: public Event
 {
-	GLR_IMPL_EVT_BODY(InputMouseButtonEvent);
+	UPGL_IMPL_EVT_BODY(InputMouseButtonEvent);
 	InputMouseButtonEvent(MouseButton button, bool isPressed)
 		:Button(button), IsPressed(isPressed) {}
 	MouseButton Button{ 0 };
@@ -51,7 +51,7 @@ struct InputMouseButtonEvent
 struct InputMouseMoveEvent
 	: public Event
 {
-	GLR_IMPL_EVT_BODY(InputMouseMoveEvent);
+	UPGL_IMPL_EVT_BODY(InputMouseMoveEvent);
 	InputMouseMoveEvent(float deltaX, float deltaY)
 		:DeltaX(deltaX), DeltaY(deltaY) {}
 

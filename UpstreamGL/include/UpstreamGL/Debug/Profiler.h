@@ -17,7 +17,7 @@ struct InputKeyboardEvent;
 struct ProfilerEvent
 	:public Event
 {
-	GLR_IMPL_EVT_BODY(ProfilerEvent)
+	UPGL_IMPL_EVT_BODY(ProfilerEvent)
 	ProfilerEvent(ProfilerMeasurement& measurement, const std::string name )
 		:Name(name), Measurement(measurement) {}
 	std::string Name;
@@ -46,7 +46,7 @@ private:
 public:
 	PlotData()
 	{
-		m_Data.resize(GLR_PROFILER_PLOT_POINTS);
+		m_Data.resize(UPGL_PROFILER_PLOT_POINTS);
 	}
 
 	inline uint32_t GetIndex() const
@@ -56,7 +56,7 @@ public:
 
 	inline void AddData(float data)
 	{
-		if (m_Index == GLR_PROFILER_PLOT_POINTS - 1)
+		if (m_Index == UPGL_PROFILER_PLOT_POINTS - 1)
 		{
 			std::rotate(m_Data.begin(), m_Data.begin() + 1, m_Data.end());
 		}

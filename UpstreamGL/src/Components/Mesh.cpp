@@ -18,9 +18,9 @@ void Mesh::Render(Camera* camera)
     if (m_MeshResource->IsSkinned())
     {
         auto bTransforms = m_MeshResource->GetArmature()->GetBoneTransforms();
-        m_Shader->SetMat4(GLR_SHADER_BONE_TRANSFORM_NAME, bTransforms.size(), bTransforms.data());
+        m_Shader->SetMat4(UPGL_SHADER_BONE_TRANSFORM_NAME, bTransforms.size(), bTransforms.data());
     }
-    m_Shader->SetMat4(GLR_SHADER_MVP_NAME, camera->GetProjectionMatrix() * camera->GetViewMatrix() * transform->GetWorldTransform());
+    m_Shader->SetMat4(UPGL_SHADER_MVP_NAME, camera->GetProjectionMatrix() * camera->GetViewMatrix() * transform->GetWorldTransform());
     m_MeshResource->Draw();
 }
 

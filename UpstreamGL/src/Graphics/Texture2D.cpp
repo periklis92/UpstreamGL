@@ -65,7 +65,7 @@ void Texture2D::LoadFromData(const uint8_t* data, int width, int height)
 {
     if (!data || ! width || !height)
     {
-        GLR_LOG_ERROR("Unable to load texture from data!");
+        UPGL_LOG_ERROR("Unable to load texture from data!");
         return;
     }
     glGenTextures(1, &m_Handle);

@@ -3,8 +3,8 @@
 #include "GLHelper.h"
 #include <glm/glm.hpp>
 
-#define GLR_SHADER_MVP_NAME "_ModelViewProjection"
-#define GLR_SHADER_BONE_TRANSFORM_NAME "_BoneTransforms"
+#define UPGL_SHADER_MVP_NAME "_ModelViewProjection"
+#define UPGL_SHADER_BONE_TRANSFORM_NAME "_BoneTransforms"
 
 class ShaderBuilder;
 

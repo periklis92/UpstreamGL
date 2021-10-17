@@ -22,12 +22,12 @@ struct SkinnedVertex
 	glm::u8vec4 color{ 255, 255, 255, 255 };
 	glm::vec3 tangent{ 0, 0, 0 };
 	glm::vec3 bitangent{ 0, 0, 0 };
-	float boneIds[GLR_MAX_BONES_PER_VERTEX];
-	float boneWeights[GLR_MAX_BONES_PER_VERTEX];
+	float boneIds[UPGL_MAX_BONES_PER_VERTEX];
+	float boneWeights[UPGL_MAX_BONES_PER_VERTEX];
 
 	inline SkinnedVertex()
 	{
-		for (int i = 0; i < GLR_MAX_BONES_PER_VERTEX; ++i)
+		for (int i = 0; i < UPGL_MAX_BONES_PER_VERTEX; ++i)
 		{
 			boneIds[i] = -1;
 			boneWeights[i] = -1;

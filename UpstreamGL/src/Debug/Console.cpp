@@ -20,7 +20,7 @@ Console::Console()
 	Logger::GetInstance()->OnLogAdded() += EventDelegate<LogEvent>{ ConnectFunc<&Console::AddEntryCallback>, this };
 	InputManager::GetInstance()->OnKeyboardKey() += InputKeyboardDelegate{ ConnectFunc<&Console::Toggle>, this };
 	std::memset(m_InputBuffer, '\0', 256);
-	m_Logs.resize(GLR_CONSOLE_LOG_SIZE);
+	m_Logs.resize(UPGL_CONSOLE_LOG_SIZE);
 }
 
 Console::~Console()
@@ -87,7 +87,7 @@ void Console::Draw()
 void Console::Clear()
 {
 	m_LogIndex = 0;
-	for(int i = 0; i < GLR_CONSOLE_LOG_SIZE; ++i)
+	for(int i = 0; i < UPGL_CONSOLE_LOG_SIZE; ++i)
 	{
 		std::get<1>(m_Logs[i]).clear();
 	}
@@ -96,7 +96,7 @@ void Console::Clear()
 bool Console::AddEntryCallback(const LogEvent* const e)
 {
 	m_Logs[m_LogIndex] = std::tuple{e->Entry.Severity, e->Entry.ToString() };
-	if (m_LogIndex == GLR_CONSOLE_LOG_SIZE - 1)
+	if (m_LogIndex == UPGL_CONSOLE_LOG_SIZE - 1)
 		std::rotate(m_Logs.begin(), m_Logs.begin() + 1, m_Logs.end());
 	else
 		++m_LogIndex;

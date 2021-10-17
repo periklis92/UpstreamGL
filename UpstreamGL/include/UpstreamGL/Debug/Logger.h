@@ -65,7 +65,7 @@ struct LogEntry
 struct LogEvent
 	: Event
 {
-	GLR_IMPL_EVT_BODY(LogEvent)
+	UPGL_IMPL_EVT_BODY(LogEvent)
 	LogEvent(const LogEntry& entry)
 	:Entry(entry) {}
 	const LogEntry& Entry;

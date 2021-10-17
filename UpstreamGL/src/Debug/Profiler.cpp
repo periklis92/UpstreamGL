@@ -13,7 +13,7 @@
 Profiler::Profiler()
 {
 	Application::GetInstance()->GetScheduler()->RegisterDelayed(
-		DelayedDelegate{ ConnectFunc<&Profiler::__PlotUpdater>, this }, nullptr, GLR_PROFILER_PLOT_INTERVAL_SECS, false);
+		DelayedDelegate{ ConnectFunc<&Profiler::__PlotUpdater>, this }, nullptr, UPGL_PROFILER_PLOT_INTERVAL_SECS, false);
 	
 	InputManager::GetInstance()->OnKeyboardKey() += InputKeyboardDelegate{ ConnectFunc<&Profiler::__ProfilerToggle>, this };
 }
@@ -77,7 +77,7 @@ void Profiler::Draw()
 		for (auto& p: m_PlotData)
 		{
 			ImGui::Text("Time: %.04fms", p.second.GetData()[p.second.GetIndex()]);
-			ImGui::PlotLines(p.first.c_str(), p.second.GetData(), GLR_PROFILER_PLOT_POINTS);
+			ImGui::PlotLines(p.first.c_str(), p.second.GetData(), UPGL_PROFILER_PLOT_POINTS);
 			ImGui::Separator();
 		}
 	}

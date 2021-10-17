@@ -58,7 +58,7 @@ Armature::Armature(const aiNode* root, const aiMesh* mesh)
 			aiVertexWeight& w = mesh->mBones[i]->mWeights[j];
 
 			VertexWeight& vw = m_VertexWeights[w.mVertexId];
-			if (vw.NumBones < GLR_MAX_BONES_PER_VERTEX)
+			if (vw.NumBones < UPGL_MAX_BONES_PER_VERTEX)
 			{
 				vw.BoneIds[vw.NumBones] = i;
 				vw.Weight[vw.NumBones] = w.mWeight;

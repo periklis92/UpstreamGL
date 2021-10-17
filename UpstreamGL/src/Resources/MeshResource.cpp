@@ -11,7 +11,7 @@
 
 void MeshResource::Load()
 {
-	GLR_LOG("Loading mesh: %s", m_Name.c_str());
+	UPGL_LOG("Loading mesh: %s", m_Name.c_str());
     Unload();
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(m_Path.generic_u8string(), aiProcess_Triangulate | aiProcess_CalcTangentSpace 
@@ -20,7 +20,7 @@ void MeshResource::Load()
     // assert(scene);
 	if (!scene) 
 	{
-		GLR_LOG_ERROR("Unable to load %s mesh from %ls", m_Name.c_str(), m_Path.c_str());
+		UPGL_LOG_ERROR("Unable to load %s mesh from %ls", m_Name.c_str(), m_Path.c_str());
 		return;
 	}
 

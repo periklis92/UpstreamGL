@@ -15,7 +15,7 @@ else()
 endif(MSVC)
 
 add_executable(${PROJECT_NAME} ${OPTIONS} main.cpp)
-target_link_libraries(${PROJECT_NAME} glm UpstreamGLib imgui)
+target_link_libraries(${PROJECT_NAME} glm UpstreamGL imgui)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DGLR_PROFILE -DGLR_DEBUG)

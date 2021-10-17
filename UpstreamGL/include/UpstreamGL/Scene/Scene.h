@@ -20,11 +20,7 @@ public:
     Camera* GetMainCamera();
     
     void Enter();
-
-    void Exit() 
-    { 
-        for (auto& n: m_Nodes ) n.second->OnExit(); 
-    }
+    void Exit();
 
 private:
     NodeContainer m_Nodes;

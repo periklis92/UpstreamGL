@@ -4,7 +4,6 @@
 #include <cereal/cereal.hpp>
 #include <cereal/archives/xml.hpp>
 
-#include <UpstreamGL/Input/InputManager.h>
 #include <UpstreamGL/System/EventDispatcher.h>
 
 struct GLFWwindow;
@@ -43,6 +42,7 @@ public:
 	EventDispatcher<WindowResizeEvent>& OnWindowResize() { return m_OnWindowResize; }
 
 	void GetSize(int& width, int& height) { width = m_Settings.Width; height = m_Settings.Height; }
+	void GetMousePosition(float& x, float& y) { x = m_LastMouseX; y = m_LastMouseY; }
 
 	template<class Archive>
 	void save(Archive& ar) const

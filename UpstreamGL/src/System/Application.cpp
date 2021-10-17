@@ -90,7 +90,7 @@ int Application::MainLoop()
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(_oglLog, 0);
 	OnInitialize();
-	#ifdef GLR_PROFILE
+	#ifdef UPGL_PROFILE
 	Logger::GetInstance()->Log("Profile is On!");
 	#endif
 	m_IsRunning = true;

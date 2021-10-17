@@ -39,5 +39,5 @@ set(CMAKE_COLOR_MAKEFILE   ON)
 
 # Include sub-projects.
 add_subdirectory("libraries")
-add_subdirectory("UpstreamGLib")
+add_subdirectory("UpstreamGL")
 add_subdirectory("example")

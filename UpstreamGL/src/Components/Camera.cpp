@@ -9,7 +9,7 @@ Camera::Camera(Node* node)
 {
     Application::GetInstance()->GetWindow()->OnWindowResize() += 
         EventDelegate<WindowResizeEvent>{ ConnectFunc<&Camera::__WindowResizeCallback>, this };
-
+    Application::GetInstance()->GetWindow()->GetSize(m_ScreenWidth, m_ScreenHeight);
     Application::GetInstance()->GetScheduler()->RegisterUpdate(UpdateDelegate{ConnectFunc<&Camera::__Update>, this});
 }
 
@@ -125,8 +125,24 @@ bool Camera::IsInFrustum(glm::vec3 pos, glm::vec3 size) const
     return true;
 }
 
+glm::vec3 Camera::ScreenToWorldSpace(const glm::vec2& screenPosition)
+{
+    glm::mat4 inv = glm::inverse(m_ProjectionMatrix * m_ViewMatrix);
+    glm::vec4 pos(  (screenPosition.x / (float)m_ScreenWidth) , 
+                    (screenPosition.y / (float)m_ScreenHeight) , 
+                    m_Node->GetTransform()->GetWorldPosition().z, 
+                    1.f);
+                    
+    pos = pos * 2.0f - 1.0f;                        
+    pos = inv * pos;
+    pos /= pos.w;
+    return pos;
+}
+
 bool Camera::__WindowResizeCallback(const WindowResizeEvent* e)
 {
+    m_ScreenWidth = e->Width;
+    m_ScreenHeight = e->Height;
     return true;
 }
 
@@ -139,15 +155,13 @@ void Camera::__Update(float deltaTime)
 PerspectiveCamera::PerspectiveCamera(Node* node, PerspectiveCameraSettings settings)
     :Camera(node), m_CameraSettings(settings)
 {
-    int width = 0, height = 0;
-    Application::GetInstance()->GetWindow()->GetSize(width, height);
-
     m_ProjectionMatrix = 
-        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), (float)width / (float)height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
+        glm::perspective(glm::radians(m_CameraSettings.FieldOfView), (float)m_ScreenWidth / (float)m_ScreenHeight, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
 }
 
 bool PerspectiveCamera::__WindowResizeCallback(const WindowResizeEvent* e)
 {
+    Camera::__WindowResizeCallback(e);
     m_ProjectionMatrix = 
         glm::perspective(glm::radians(m_CameraSettings.FieldOfView), 
         (float)e->Width / (float)e->Height, m_CameraSettings.NearClip, m_CameraSettings.FarClip);
@@ -163,6 +177,7 @@ OrthoCamera::OrthoCamera(Node* node, OrthoCameraSettings settings)
 
 bool OrthoCamera::__WindowResizeCallback(const WindowResizeEvent* e)
 {
+    Camera::__WindowResizeCallback(e);
     float aspectRatio = e->Width / e->Height;
     float height = m_CameraSettings.size * aspectRatio;
     m_ProjectionMatrix = 

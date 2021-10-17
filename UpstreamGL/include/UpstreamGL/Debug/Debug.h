@@ -5,7 +5,7 @@
 #include "Logger.h"
 #include "Console.h"
 
-#ifdef  GLR_PROFILE
+#ifdef  UPGL_PROFILE
 #define GLR_PROFILER_START(section)			Profiler::GetInstance()->StartClock(section)
 #define GLR_PROFILER_END()					Profiler::GetInstance()->EndClock()
 #define GLR_PROFILER_EXPORT_FILE(filename)	Profiler::GetInstance()->ResultsToText(filename)
@@ -17,7 +17,7 @@
 #define GLR_PROFILER_DRAW()
 #endif
 
-#ifdef  GLR_DEBUG
+#ifdef  UPGL_DEBUG
 #define GLR_DEBUG_LOG(message, ...)              Logger::GetInstance()->Log(LogEntry::None, message, __VA_ARGS__);
 #define GLR_DEBUG_LOG_INFO(message, ...)         Logger::GetInstance()->Log(LogEntry::Info, message, __VA_ARGS__);
 #define GLR_DEBUG_LOG_WARNING(message, ...)      Logger::GetInstance()->Log(LogEntry::Warning, message, __VA_ARGS__);

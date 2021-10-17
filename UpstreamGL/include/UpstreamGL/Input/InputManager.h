@@ -1,23 +1,33 @@
 #pragma once
 
 #include "InputEvent.h"
+#include <glm/glm.hpp>
+#include <UpstreamGL/System/Application.h>
+#include <UpstreamGL/System/Window.h>
 
 class InputManager
 {
 public:
-	EventDispatcher<InputKeyboardEvent>& OnKeyboardKey()
+	inline EventDispatcher<InputKeyboardEvent>& OnKeyboardKey()
 	{
 		return m_KeyboardDispatcher;
 	}
 
-	EventDispatcher<InputMouseButtonEvent>& OnMouseButton()
+	inline EventDispatcher<InputMouseButtonEvent>& OnMouseButton()
 	{
 		return m_MouseButtonDispatcher;
 	}
 
-	EventDispatcher<InputMouseMoveEvent>& OnMouseMove()
+	inline EventDispatcher<InputMouseMoveEvent>& OnMouseMove()
 	{
 		return m_MouseMoveDispatcher;
+	}
+
+	inline glm::vec2 GetMousePosition() const
+	{
+		glm::vec2 pos{0.f};
+		Application::GetInstance()->GetWindow()->GetMousePosition(pos.x, pos.y);
+		return pos;
 	}
 
 	static InputManager* GetInstance() 
@@ -32,6 +42,4 @@ private:
 	EventDispatcher<InputKeyboardEvent> m_KeyboardDispatcher;
 	EventDispatcher<InputMouseButtonEvent> m_MouseButtonDispatcher;
 	EventDispatcher<InputMouseMoveEvent> m_MouseMoveDispatcher;
-
-	float m_LastMouseX{0.f}, m_LastMouseY{0.f};
 };

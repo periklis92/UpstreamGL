@@ -25,6 +25,11 @@ void Scene::Enter()
     for (auto& n: m_Nodes ) n.second->OnEnter();
 }
 
+void Scene::Exit() 
+{ 
+    for (auto& n: m_Nodes ) n.second->OnExit(); 
+}
+
 Node& Scene::GetNode(const std::string& name)
 {
     return *m_Nodes[name];

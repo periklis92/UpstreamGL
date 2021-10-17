@@ -35,6 +35,8 @@ public:
     void CalculateFrustumPlanes();
     bool IsInFrustum(glm::vec3 pos, glm::vec3 size) const;
 
+    virtual glm::vec3 ScreenToWorldSpace(const glm::vec2& screenPosition);
+
 protected:
     virtual bool __WindowResizeCallback(const WindowResizeEvent* e);
     virtual void __Update(float deltaTime);
@@ -43,6 +45,7 @@ protected:
     glm::vec4 m_FrustumPlanes[6];
     glm::mat4 m_ViewMatrix{0.f};
     glm::mat4 m_ProjectionMatrix{0.f};
+    int m_ScreenWidth{0}, m_ScreenHeight{0};
 };
 
 class PerspectiveCamera
@@ -54,8 +57,7 @@ public:
     virtual const std::string GetComponentName() const override { return "PerspectiveCamera"; }
     
 protected:
-    virtual bool __WindowResizeCallback(const WindowResizeEvent* e);
-    // virtual void __Update(float deltaTime);
+    virtual bool __WindowResizeCallback(const WindowResizeEvent* e) override;
 
 private:
     PerspectiveCameraSettings m_CameraSettings;
@@ -69,14 +71,10 @@ public:
 
     virtual const std::string GetComponentName() const override { return "OrthographicCamera"; }
 
-    void SetCameraSettings(OrthoCameraSettings settings)
-    {
-        m_CameraSettings = settings;
-    }
+    inline void SetCameraSettings(OrthoCameraSettings settings) { m_CameraSettings = settings; }
 
 protected:
-    virtual bool __WindowResizeCallback(const WindowResizeEvent* e);
-    // virtual void __Update(float deltaTime);
+    virtual bool __WindowResizeCallback(const WindowResizeEvent* e) override;
 
 private:
     OrthoCameraSettings m_CameraSettings;

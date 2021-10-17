@@ -1,7 +1,7 @@
 ﻿#include <UpstreamGL/UpstreamGL.h>
 #include <imgui.h>
 
-typedef glm::vec2 Vector2 ;
+typedef glm::vec2 Vector2;
 
 class CameraController
 	: public Component
@@ -12,6 +12,7 @@ class CameraController
 	float RotateSpeed{6.5f};
 public:
 	float MoveSpeed = 4.f;
+	glm::vec3 MousePOsil;
 	CameraController(Node* node)
 	:Component(node) 
 	{
@@ -33,6 +34,8 @@ public:
 			RotateAxis = glm::vec2{0.f, 0.f};
 		transform->Rotate(frameRot.x, glm::vec3{0.f, 1.f, 0.f});
 		transform->Rotate(frameRot.y, transform->GetRightDirection());
+
+		MousePOsil = m_Node->GetComponent<PerspectiveCamera>()->ScreenToWorldSpace(InputManager::GetInstance()->GetMousePosition());
 	}
 
 	const std::string GetComponentName() const override
@@ -153,6 +156,7 @@ public:
 	{
 		Application::OnGui();
 		auto& cameraNode = Director::GetInstance()->GetScene()->GetNode("camera");
+		auto camController = cameraNode.GetComponent<CameraController>();
 		auto transform = cameraNode.GetTransform();
 		auto pos = transform->GetWorldPosition();
 		ImGui::Begin("Camera Info", nullptr);
@@ -166,6 +170,16 @@ public:
 		ImGui::Text("Euler X: %.02f", rot.x);
 		ImGui::Text("Euler Y: %.02f", rot.y);
 		ImGui::Text("Euler Z: %.02f", rot.z);
+		ImGui::Separator();
+		ImGui::Text("Mouse World Pos:");
+		ImGui::Text("X: %.04f", camController->MousePOsil.x);
+		ImGui::Text("Y: %.04f", camController->MousePOsil.y);
+		ImGui::Text("Z: %.04f", camController->MousePOsil.z);
+		ImGui::Separator();
+		ImGui::Text("Mouse Screen Pos:");
+		auto mpos = InputManager::GetInstance()->GetMousePosition();
+		ImGui::Text("X: %.04f", mpos.x);
+		ImGui::Text("Y: %.04f", mpos.y);
 		ImGui::End();
 	}
 };

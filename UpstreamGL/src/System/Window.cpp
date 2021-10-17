@@ -1,4 +1,5 @@
 #include <UpstreamGL/System/Window.h>
+#include <UpstreamGL/Input/InputManager.h>
 #include <GLFW/glfw3.h>
 
 Window::Window(const char* title, WindowSettings settings)
@@ -44,7 +45,6 @@ void Window::MakeCurrent()
 {
 	glfwMakeContextCurrent(m_GLFWHandle);
 }
-
 
 void Window::__KeyCallback(GLFWwindow* glwin, int key, int, int action, int)
 {

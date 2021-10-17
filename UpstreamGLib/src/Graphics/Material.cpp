@@ -1,5 +1,5 @@
-#include "Material.h"
-#include "Shader.h"
+#include <UpstreamGL/Graphics/Material.h>
+#include <UpstreamGL/Graphics/Shader.h>
 
 void Material::Bind()
 {

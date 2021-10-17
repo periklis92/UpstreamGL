@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "Graphics/Animation.h"
+#include <UpstreamGL/Graphics/Animation.h>
 
 struct aiScene;
 class AnimationClip;

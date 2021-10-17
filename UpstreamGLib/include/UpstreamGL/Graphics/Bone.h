@@ -5,8 +5,8 @@
 #include <cstdint>
 #include <vector>
 
-#include "glm/glm.hpp"
-#include "Config.h"
+#include <UpstreamGL/Config.h>
+#include <glm/glm.hpp>
 
 struct aiNode;
 struct aiMesh;

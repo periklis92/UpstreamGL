@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include "Graphics/Shader.h"
+#include <UpstreamGL/Graphics/Shader.h>
 
 #define GLR_MESH_SHADER_NAME "simpleLit"
 #define GLR_SKINNED_MESH_SHADER_NAME "simpleLitSkinned"

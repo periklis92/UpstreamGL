@@ -1,9 +1,9 @@
-#include "Logger.h"
+#include <UpstreamGL/Debug/Logger.h>
 
 #include <cstdarg>
 #include <cstdio>
 
-#include "System/File.h"
+#include <UpstreamGL/System/File.h>
 
 void Logger::Log(const std::string& text, LogEntry::LogType severity)
 {

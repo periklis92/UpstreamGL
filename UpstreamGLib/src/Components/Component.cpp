@@ -1,4 +1,4 @@
-#include "Component.h"
+#include <UpstreamGL/Components/Component.h>
 
 #include <cassert>
 

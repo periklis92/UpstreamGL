@@ -2,7 +2,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/fwd.hpp>
-#include "Config.h"
+#include <UpstreamGL/Config.h>
+
 struct Vertex
 {
 	glm::vec3 position{0, 0, 0};

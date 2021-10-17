@@ -1,13 +1,14 @@
-#include "Profiler.h"
+#include <UpstreamGL/Debug/Profiler.h>
 
 #include <sstream>
 #include <algorithm>
 
+#include <UpstreamGL/System/Application.h>
+#include <UpstreamGL/System/Scheduler.h>
+#include <UpstreamGL/System/File.h>
+#include <UpstreamGL/Input/InputManager.h>
+
 #include "imgui.h"
-#include "System/Application.h"
-#include "System/Scheduler.h"
-#include "System/File.h"
-#include "Input/InputManager.h"
 
 Profiler::Profiler()
 {

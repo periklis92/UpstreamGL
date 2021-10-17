@@ -1,5 +1,6 @@
-#include "Texture2D.h"
-#include "Debug/Debug.h"
+#include <UpstreamGL/Graphics/Texture2D.h>
+#include <UpstreamGL/Debug/Debug.h>
+
 #include <glad/glad.h>
 #include <stb/stb_image.h>
 

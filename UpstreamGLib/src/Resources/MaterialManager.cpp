@@ -1,4 +1,4 @@
-#include "MaterialManager.h"
+#include <UpstreamGL/Resources/MaterialManager.h>
 
 void MaterialManager::AddMaterial(const std::string& name, Material* material)
 {

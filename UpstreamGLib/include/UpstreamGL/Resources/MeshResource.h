@@ -4,7 +4,8 @@
 
 #include <vector>
 
-#include "Graphics/MeshData.h"
+#include <UpstreamGL/Graphics/MeshData.h>
+
 struct aiScene;
 struct aiMesh;
 class Armature;

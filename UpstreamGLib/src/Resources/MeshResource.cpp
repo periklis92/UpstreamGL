@@ -1,13 +1,13 @@
-#include "MeshResource.h"
+#include <UpstreamGL/Resources/MeshResource.h>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "Graphics/Bone.h"
-#include "Graphics/MeshData.h"
-#include "Math/AssimpGLMHelper.h"
-#include "Debug/Debug.h"
+#include <UpstreamGL/Graphics/Bone.h>
+#include <UpstreamGL/Graphics/MeshData.h>
+#include <UpstreamGL/Math/AssimpGLMHelper.h>
+#include <UpstreamGL/Debug/Debug.h>
 
 void MeshResource::Load()
 {

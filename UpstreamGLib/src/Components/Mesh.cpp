@@ -1,14 +1,6 @@
-#include "Mesh.h"
-
-#include "Camera.h"
-#include "Debug/Logger.h"
-#include "Resources/MeshResource.h"
-#include "Graphics/MeshData.h"
-#include "Graphics/Shader.h"
-#include "Scene/Node.h"
-#include "Scene/Director.h"
-#include "Graphics/MeshRenderer.h"
-#include "Components/Transform.h"
+#include <UpstreamGL/Components/Mesh.h>
+#include <UpstreamGL/Scene/Director.h>
+#include <UpstreamGL/Components/Camera.h>
 
 void Mesh::OnEnter()
 {

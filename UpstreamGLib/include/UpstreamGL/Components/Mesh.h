@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Component.h"
-#include "Graphics/Renderable.h"
-#include "Resources/MeshResource.h"
+#include <UpstreamGL/Components/Component.h>
+#include <UpstreamGL/Graphics/Renderable.h>
+#include <UpstreamGL/Resources/MeshResource.h>
 
 class MeshData;
 class Shader;

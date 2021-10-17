@@ -6,10 +6,10 @@
 #include <string>
 #include <vector>
 
-#include "System/Event.h"
-#include "System/EventDispatcher.h"
-#include "System/Delegate.h"
-#include "Config.h"
+#include <UpstreamGL/System/EventDispatcher.h>
+#include <UpstreamGL/System/Event.h>
+#include <UpstreamGL/System/Delegate.h>
+#include <UpstreamGL/Config.h>
 
 struct ProfilerMeasurement;
 struct InputKeyboardEvent;
@@ -49,12 +49,12 @@ public:
 		m_Data.resize(GLR_PROFILER_PLOT_POINTS);
 	}
 
-	uint32_t GetIndex() const
+	inline uint32_t GetIndex() const
 	{
 		return m_Index;
 	}
 
-	void AddData(float data)
+	inline void AddData(float data)
 	{
 		if (m_Index == GLR_PROFILER_PLOT_POINTS - 1)
 		{
@@ -66,7 +66,7 @@ public:
 		m_Data[m_Index] = data;
 	}
 
-	const float* GetData() const
+	inline const float* GetData() const
 	{
 		return m_Data.data();
 	}
@@ -85,7 +85,7 @@ public:
 
 	static Profiler* GetInstance();
 
-	EventDispatcher<ProfilerEvent>& OnMeasurementMade() { return m_ProfilerDispatcher; }
+	inline EventDispatcher<ProfilerEvent>& OnMeasurementMade() { return m_ProfilerDispatcher; }
 	
 private:
 	Profiler();

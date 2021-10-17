@@ -8,9 +8,9 @@
 #include <iomanip>
 #include <iostream>
 
-#include "System/Delegate.h"
-#include "System/Event.h"
-#include "System/EventDispatcher.h"
+#include <UpstreamGL/System/Delegate.h>
+#include <UpstreamGL/System/Event.h>
+#include <UpstreamGL/System/EventDispatcher.h>
 
 struct LogEntry
 {

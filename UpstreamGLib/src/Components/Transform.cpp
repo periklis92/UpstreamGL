@@ -1,6 +1,6 @@
-#include "Transform.h"
+#include <UpstreamGL/Components/Transform.h>
+#include <UpstreamGL/Math/Math.h>
 
-#include "Math/Math.h"
 #include <glm/gtx/euler_angles.hpp>
 #include <algorithm>
 

@@ -1,9 +1,9 @@
-#include "Camera.h"
-#include "System/Application.h"
-#include "System/Window.h"
-#include "Scene/Node.h"
-#include "System/Scheduler.h"
-#include "Transform.h"
+#include <UpstreamGL/Components/Camera.h>
+#include <UpstreamGL/System/Application.h>
+#include <UpstreamGL/System/EventDispatcher.h>
+#include <UpstreamGL/System/Scheduler.h>
+#include <UpstreamGL/System/Window.h>
+
 Camera::Camera(Node* node)
     : Component(node)
 {

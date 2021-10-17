@@ -1,9 +1,10 @@
-#include "Bone.h"
-#include "assimp/scene.h"
-#include "Math/AssimpGLMHelper.h"
-#include "Animation.h"
-#include "Vertex.h"
+#include <UpstreamGL/Graphics/Bone.h>
+
 #include <memory>
+#include <assimp/scene.h>
+#include <UpstreamGL/Math/AssimpGLMHelper.h>
+#include <UpstreamGL/Graphics/Animation.h>
+
 Bone::Bone()
 	:m_Name(), m_Id(0), m_Transform(1.f), m_Offset(1.f), m_FinalTransform(1.f), m_Parent(nullptr)
 {

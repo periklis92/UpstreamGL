@@ -1,6 +1,6 @@
-#include "TextureResource.h"
+#include <UpstreamGL/Resources/TextureResource.h>
 
-#include "Debug/Debug.h"
+#include <UpstreamGL/Debug/Debug.h>
 #include <stb/stb_image.h>
 
 void TextureResource::Load()

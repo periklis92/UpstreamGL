@@ -5,12 +5,12 @@
 #include <string>
 #include <cassert>
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include "glm/gtx/quaternion.hpp"
 #include "glm/ext.hpp"
 
-#include "Components/ComponentRegistry.h"
-#include "Components/Transform.h"
+#include <UpstreamGL/Components/ComponentRegistry.h>
+#include <UpstreamGL/Components/Transform.h>
 
 class Node
 {

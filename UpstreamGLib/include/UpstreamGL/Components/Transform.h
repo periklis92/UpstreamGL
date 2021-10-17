@@ -5,7 +5,7 @@
 #include <string>
 #include <cassert>
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include "glm/gtx/quaternion.hpp"
 #include "glm/ext.hpp"
 

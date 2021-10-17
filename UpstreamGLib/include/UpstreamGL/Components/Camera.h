@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Component.h"
-#include "Math/AABB.h"
-#include "glm/glm.hpp"
-#include "Scene/Director.h"
+#include <UpstreamGL/Resources/MeshResource.h>
+#include <UpstreamGL/Math/AABB.h>
+#include <UpstreamGL/Scene/Director.h>
+
+#include <glm/glm.hpp>
 
 struct WindowResizeEvent;
 

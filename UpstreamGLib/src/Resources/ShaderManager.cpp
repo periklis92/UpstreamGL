@@ -1,4 +1,4 @@
-#include "ShaderManager.h"
+#include <UpstreamGL/Resources/ShaderManager.h>
 
 
 void ShaderManager::AddShader(const std::string& name, Shader* shader)

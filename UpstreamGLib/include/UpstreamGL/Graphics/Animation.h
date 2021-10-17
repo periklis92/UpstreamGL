@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <map>
 

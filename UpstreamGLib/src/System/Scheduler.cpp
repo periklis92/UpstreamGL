@@ -1,7 +1,8 @@
-#include "Scheduler.h"
+#include <UpstreamGL/System/Scheduler.h>
+
 #include <algorithm>
 
-#include "Debug/Debug.h"
+#include <UpstreamGL/Debug/Debug.h>
 
 void Scheduler::Update(float deltaTime)
 {

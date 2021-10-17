@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/Material.h"
+#include <UpstreamGL/Graphics/Material.h>
 
 #include <map>
 #include <string>

@@ -1,11 +1,13 @@
-#include "Console.h"
+#include <UpstreamGL/Debug/Console.h>
+
+#include <UpstreamGL/Input/InputManager.h>
+#include <UpstreamGL/Debug/Debug.h>
+#include <UpstreamGL/Debug/Logger.h>
+
 #include <cstring>
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_glfw.h"
-#include "System/Application.h"
-#include "Input/InputManager.h"
-#include "Config.h"
 
 #define IM_DEF_COLOR	ImColor{ 200, 210, 220, 255 }
 #define IM_INFO_COLOR	ImColor{ 100, 150, 255, 255 }

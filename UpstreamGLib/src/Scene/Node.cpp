@@ -1,4 +1,5 @@
-#include "Node.h"
+#include <UpstreamGL/Scene/Node.h>
+
 Node::Node(const std::string& name)
 	:m_Name(name)
 {

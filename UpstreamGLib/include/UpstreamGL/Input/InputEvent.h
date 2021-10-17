@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System/EventDispatcher.h"
+#include <UpstreamGL/System/EventDispatcher.h>
 
 //GLFW KeyBindings
 enum class KeyboardKey : uint32_t

@@ -1,5 +1,5 @@
-#include "Animation.h"
-#include "Math/AssimpGLMHelper.h"
+#include <UpstreamGL/Graphics/Animation.h>
+#include <UpstreamGL/Math/AssimpGLMHelper.h>
 #include "assimp/anim.h"
 
 AnimationChannel::AnimationChannel(const std::string& name, int32_t Id, const aiNodeAnim* channel)

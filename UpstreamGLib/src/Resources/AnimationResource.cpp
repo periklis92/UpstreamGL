@@ -1,12 +1,12 @@
-#include "AnimationResource.h"
+#include <UpstreamGL/Resources/AnimationResource.h>
 
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 
-#include "Graphics/Animation.h"
-#include "Math/AssimpGLMHelper.h"
-#include "Debug/Debug.h"
+#include <UpstreamGL/Graphics/Animation.h>
+#include <UpstreamGL/Math/AssimpGLMHelper.h>
+#include <UpstreamGL/Debug/Debug.h>
 
 void AnimationResource::Load()
 {

@@ -1,9 +1,9 @@
-#include "MeshData.h"
+#include <UpstreamGL/Graphics/MeshData.h>
 
 #include <cstdint>
 
+#include <UpstreamGL/Graphics/Animation.h>
 #include "glad/glad.h"
-#include "Animation.h"
 
 MeshData::MeshData(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, const AABB& aabb)
 	:m_NumIndices(indices.size()), m_AABB(aabb), m_VertexArray(0), m_VertexBuffer(0), m_ElementBuffer(0), m_Armature(nullptr)

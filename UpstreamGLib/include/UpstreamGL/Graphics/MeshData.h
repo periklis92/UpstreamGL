@@ -5,7 +5,7 @@
 #include "Bone.h"
 #include "Shader.h"
 #include "Vertex.h"
-#include "Math/AABB.h"
+#include <UpstreamGL/Math/AABB.h>
 
 class AnimationClip;
 

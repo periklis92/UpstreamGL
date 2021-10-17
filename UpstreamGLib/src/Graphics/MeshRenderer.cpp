@@ -1,8 +1,8 @@
-#include "MeshRenderer.h"
+#include "UpstreamGL/Graphics/MeshRenderer.h"
 #include "glad/glad.h"
 #include <algorithm>
 #include <glm/glm.hpp>
-#include <Components/Camera.h>
+#include <UpstreamGL/Components/Camera.h>
 
 void MeshRenderer::Render(Camera* camera)
 {

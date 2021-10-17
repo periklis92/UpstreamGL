@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Resource.h"
-#include "Graphics/Texture2D.h"
+#include <UpstreamGL/Graphics/Texture2D.h>
 
 class TextureResource
     : public Resource<Texture2D>

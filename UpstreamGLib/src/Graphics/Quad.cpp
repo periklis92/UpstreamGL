@@ -1,4 +1,4 @@
-#include "Quad.h"
+#include <UpstreamGL/Graphics/Quad.h>
 
 Quad::Quad(glm::vec2 size, glm::vec2 center)
 {

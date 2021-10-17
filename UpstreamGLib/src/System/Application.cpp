@@ -1,4 +1,4 @@
-﻿#include "Application.h"
+﻿#include <UpstreamGL/System/Application.h>
 #include <cassert>
 #include <algorithm>
 #include <fstream>
@@ -7,17 +7,18 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <fstream>
-#include "Window.h"
-#include "File.h"
-#include "Debug/Logger.h"
-#include "Debug/Console.h"
-#include "Scheduler.h"
+#include <UpstreamGL/System/Window.h>
+#include <UpstreamGL/System/File.h>
+#include <UpstreamGL/Debug/Profiler.h>
+#include <UpstreamGL/System/Scheduler.h>
+#include <UpstreamGL/Debug/Console.h>
+#include <UpstreamGL/Debug/Profiler.h>
+#include <UpstreamGL/Debug/Debug.h>
+#include <UpstreamGL/Scene/Director.h>
+#include <UpstreamGL/Components/Camera.h>
+
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
-#include <Debug/Profiler.h>
-#include "Debug/Debug.h"
-#include "Scene/Director.h"
-#include "Components/Camera.h"
 
 static void _oglLog(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userData);
 

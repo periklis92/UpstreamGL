@@ -1,4 +1,5 @@
 ﻿#include <UpstreamGL/UpstreamGL.h>
+#include <imgui.h>
 
 typedef glm::vec2 Vector2 ;
 
@@ -85,14 +86,12 @@ private:
 	}
 
 };
-
 class MyApp : public Application
 {
 public:
 	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
-		
 	}
 
 	Shader shader;	
@@ -152,22 +151,22 @@ public:
 
 	virtual void OnGui() override
 	{
-		// Application::OnGui();
-		// auto& cameraNode = Director::GetInstance()->GetScene()->GetNode("camera");
-		// auto transform = cameraNode.GetTransform();
-		// auto pos = transform->GetWorldPosition();
-		// ImGui::Begin("Camera Info", nullptr);
-		// ImGui::Text("Position:");
-		// ImGui::Text("Pos X: %.02f", pos.x);
-		// ImGui::Text("Pos Y: %.02f", pos.y);
-		// ImGui::Text("Pos Z: %.02f", pos.z);
-		// ImGui::Separator();
-		// auto rot = glm::degrees(transform->GetWorldRotation());
-		// ImGui::Text("Rotation:");
-		// ImGui::Text("Euler X: %.02f", rot.x);
-		// ImGui::Text("Euler Y: %.02f", rot.y);
-		// ImGui::Text("Euler Z: %.02f", rot.z);
-		// ImGui::End();
+		Application::OnGui();
+		auto& cameraNode = Director::GetInstance()->GetScene()->GetNode("camera");
+		auto transform = cameraNode.GetTransform();
+		auto pos = transform->GetWorldPosition();
+		ImGui::Begin("Camera Info", nullptr);
+		ImGui::Text("Position:");
+		ImGui::Text("Pos X: %.02f", pos.x);
+		ImGui::Text("Pos Y: %.02f", pos.y);
+		ImGui::Text("Pos Z: %.02f", pos.z);
+		ImGui::Separator();
+		auto rot = glm::degrees(transform->GetWorldRotation());
+		ImGui::Text("Rotation:");
+		ImGui::Text("Euler X: %.02f", rot.x);
+		ImGui::Text("Euler Y: %.02f", rot.y);
+		ImGui::Text("Euler Z: %.02f", rot.z);
+		ImGui::End();
 	}
 };
 

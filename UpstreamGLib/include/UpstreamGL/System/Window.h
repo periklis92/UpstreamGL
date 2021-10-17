@@ -3,8 +3,9 @@
 #include <list>
 #include <cereal/cereal.hpp>
 #include <cereal/archives/xml.hpp>
-#include "Input/InputManager.h"
-#include "System/EventDispatcher.h"
+
+#include <UpstreamGL/Input/InputManager.h>
+#include <UpstreamGL/System/EventDispatcher.h>
 
 struct GLFWwindow;
 

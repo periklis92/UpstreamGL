@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Graphics/MeshRenderer.h"
-#include "Resources/ShaderManager.h"
+#include <UpstreamGL/Graphics/MeshRenderer.h>
+#include <UpstreamGL/Resources/ShaderManager.h>
 #include "Scene.h"
 
 class Director

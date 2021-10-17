@@ -1,6 +1,8 @@
-#include "Scene.h"
+#include <UpstreamGL/Scene/Scene.h>
+
 #include <algorithm>
-#include "Components/Camera.h"
+
+#include <UpstreamGL/Components/Camera.h>
 
 void Scene::Unload()
 {

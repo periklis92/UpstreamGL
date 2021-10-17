@@ -1,4 +1,4 @@
-#include "Shader.h"
+#include <UpstreamGL/Graphics/Shader.h>
 #include <cstdio>
 #include <glad/glad.h>
 

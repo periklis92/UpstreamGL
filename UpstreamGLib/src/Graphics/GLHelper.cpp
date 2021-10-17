@@ -1,4 +1,4 @@
-#include "GLHelper.h"
+#include <UpstreamGL/Graphics/GLHelper.h>
 #include <glad/glad.h>
 #include <cstdio>
 #include <cstdlib>

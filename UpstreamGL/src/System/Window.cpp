@@ -2,6 +2,7 @@
 #include <UpstreamGL/Input/InputManager.h>
 #include <GLFW/glfw3.h>
 #include <UpstreamGL/Debug/Debug.h>
+#include <glad/glad.h>
 
 Window::Window(const char* title, WindowSettings settings)
 	:m_GLFWHandle(nullptr)
@@ -24,7 +25,7 @@ Window::Window(const char* title, WindowSettings settings)
 	glfwSetWindowCloseCallback(m_GLFWHandle, Window::__WindowCloseCallback);
 	glfwSetWindowSizeCallback(m_GLFWHandle, Window::__WindowSizeCallback);
 	glfwSetCursorPosCallback(m_GLFWHandle, Window::__MousePosCallback);
-
+	
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	assert(monitor);
 	int count = 0;
@@ -112,6 +113,15 @@ void Window::SetResolution(const WindowResolution& resolution)
 		glfwSetWindowMonitor(m_GLFWHandle, monitor, 0, 0, resolution.Width, resolution.Height, resolution.RefreshRate);
 	}
 	m_Settings.Resolution = resolution;
+}
+
+void Window::SetVSync(bool vsync)
+{
+	m_Settings.VSync = vsync;
+	if (vsync)
+		glfwSwapInterval(1);
+	else
+		glfwSwapInterval(0);
 }
 
 void Window::Close()

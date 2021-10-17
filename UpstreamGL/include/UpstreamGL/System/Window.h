@@ -19,7 +19,7 @@ struct WindowResolution
 struct WindowSettings
 {
 	WindowResolution Resolution = {800, 600, 60};
-	bool Fullscreen = false, Resizable = true;
+	bool Fullscreen = false, Resizable = true, VSync = false;
 	char RedBits = 8, GreenBits = 8, BlueBits = 8;
 	char AplhaBits = 8, DepthBits = 24, StencilBits = 8;
 
@@ -55,6 +55,7 @@ public:
 	void GetMousePosition(float& x, float& y) { x = m_LastMouseX; y = m_LastMouseY; }
 	void SetFullscreen(bool fullscreen = true);
 	void SetResolution(const WindowResolution& resolution);
+	void SetVSync(bool vsync = true);
 	void Close();
 
 	template<class Archive>

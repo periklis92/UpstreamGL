@@ -85,6 +85,8 @@ void TestMenu::Draw()
                 }
                 ImGui::EndMenu();
             }
+            if (ImGui::Checkbox("V-Sync", &m_VSyncValue))
+                Application::GetInstance()->GetWindow()->SetVSync(m_VSyncValue);
         }
         ImGui::End();
     }

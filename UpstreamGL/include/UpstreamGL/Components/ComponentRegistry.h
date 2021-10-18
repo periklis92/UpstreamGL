@@ -27,9 +27,6 @@ public:
         m_Components.clear();
     }
 
-    // template<class T, class...Args>
-    // inline auto AddComponent(Args&&...args) { return m_Components.emplace(typeid(T), new T(std::forward<Args>(args)...)); }
-
     template<class T>
     auto AddComponent(Node* node) { return dynamic_cast<T*>(m_Components.emplace(typeid(T), new T(node)).first->second); }
 

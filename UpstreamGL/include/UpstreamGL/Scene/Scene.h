@@ -6,7 +6,7 @@
 
 class Camera;
 
-using NodeContainer = std::map<std::string, Node*>;
+using NodeContainer = std::list<Node>;
 
 class Scene
 {
@@ -14,7 +14,6 @@ public:
     void Unload();
 
     Node& CreateNode(const std::string& name = "");
-    Node& GetNode(const std::string& name);
     NodeContainer::iterator FindNode(const std::string& name);
     void SetMainCamera(Camera* camera);
     Camera* GetMainCamera();

@@ -6,38 +6,29 @@
 
 void Scene::Unload()
 {
-    for (auto node: m_Nodes)
-    {
-        delete node.second;
-    }
     m_Nodes.clear();
 }
 
 Node& Scene::CreateNode(const std::string& name)
 {
-    auto& node = *m_Nodes.emplace(name, new Node(name)).first->second;
+    auto& node = m_Nodes.emplace_back(std::move(Node(name)));
     node.AddComponent<Transform>();
     return node;
 }
 
 void Scene::Enter()
 {
-    for (auto& n: m_Nodes ) n.second->OnEnter();
+    for (auto& n: m_Nodes ) n.OnEnter();
 }
 
 void Scene::Exit() 
 { 
-    for (auto& n: m_Nodes ) n.second->OnExit(); 
-}
-
-Node& Scene::GetNode(const std::string& name)
-{
-    return *m_Nodes[name];
+    for (auto& n: m_Nodes ) n.OnExit(); 
 }
 
 NodeContainer::iterator Scene::FindNode(const std::string& name)
 {
-    return m_Nodes.find(name);
+    return std::find(m_Nodes.begin(), m_Nodes.end(), [name](Node& n){return n.GetName() == name; });
 }
 
 void Scene::SetMainCamera(Camera* camera)

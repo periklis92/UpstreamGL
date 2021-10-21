@@ -1,6 +1,7 @@
 #include <UpstreamGL/System/File.h>
 
 #include <cstdio>
+#include <strstream>
 
 File::File()
 	:m_fstream()
@@ -92,10 +93,7 @@ void File::Read(char* buffer, size_t count) const
 std::string File::ToString()
 {
 	if (!IsOpen()) return "";
-	std::filebuf* buf = m_fstream.rdbuf();
-	std::string str;
-	size_t size = GetSize();
-	str.resize(size);
-	buf->sgetn(&str[0], size);
-	return str;
+	std::stringstream str;
+	str << m_fstream.rdbuf();
+	return str.str();
 }

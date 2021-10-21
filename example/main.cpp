@@ -3,6 +3,8 @@
 #include "testMenu.h"
 #include <imgui.h>
 #include <cstdio>
+#include <UpstreamGL/Debug/Debug.h>
+
 typedef glm::vec2 Vector2;
 
 
@@ -12,6 +14,7 @@ public:
 	MyApp(int argc, char** argv)
 		: Application("MyApp", argc, argv)
 	{
+		
 	}
 	TestMenu* menu;
 	Shader shader;	
@@ -32,14 +35,14 @@ public:
 			.Build();
 
 		ComponentRegistry::RegisterComponent<Mesh>("mesh");
-
+		
 		auto& cameraNode = Director::GetInstance()->GetScene()->CreateNode("camera");
 		cameraNode.AddComponent<PerspectiveCamera>();
 		cameraNode.AddComponent<CameraController>();
 		auto transform = cameraNode.GetTransform();
 		transform->SetLocalPosition(glm::vec3(0, 0, 0));
 		MeshResource model("cube", "./resources/Cube.fbx");
-
+		
 		for (int i = 0; i < 20; ++i)
 		{
 			auto& cube = Director::GetInstance()->GetScene()->CreateNode("cube " + std::to_string(i));

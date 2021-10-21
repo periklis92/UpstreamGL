@@ -40,9 +40,9 @@ void TestMenu::Draw()
 
     if (m_ShowPositions)
     {
-        auto& cameraNode = Director::GetInstance()->GetScene()->GetNode("camera");
-        auto camController = cameraNode.GetComponent<CameraController>();
-        auto transform = cameraNode.GetTransform();
+        auto cameraNode = Director::GetInstance()->GetScene()->FindNode("camera");
+        auto camController = cameraNode->GetComponent<CameraController>();
+        auto transform = cameraNode->GetTransform();
         auto pos = transform->GetWorldPosition();
         ImGui::Begin("Camera Info", &m_ShowPositions);
         ImGui::Text("Position:");

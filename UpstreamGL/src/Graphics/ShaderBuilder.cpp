@@ -1,6 +1,9 @@
 #include <UpstreamGL/Graphics/ShaderBuilder.h>
+#include <UpstreamGL/Debug/Debug.h>
+
 #include <cstdio>
 #include <glad/glad.h>
+
 
 ShaderBuilder::ShaderBuilder(const char* name)
 {
@@ -35,7 +38,7 @@ void ShaderBuilder::CheckShaderCompilationError(uint32_t shaderId)
 		glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &logSize);
 		char* infoLog = new char[logSize];
 		glGetShaderInfoLog(shaderId, logSize, NULL, infoLog);
-		printf("-----------------Shader Compilation Error-----------------\n %s", infoLog);
+		UPGL_LOG_ERROR("-----------------Shader Compilation Error-----------------\n %s", infoLog);
 	}
 }
 
@@ -49,6 +52,6 @@ void ShaderBuilder::CheckProgramLinkError(uint32_t programID)
 		glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &logSize);
 		char* infoLog = new char[logSize];
 		glGetProgramInfoLog(programID, logSize, NULL, infoLog);
-		printf("-----------------Program Linking Error-----------------\n %s", infoLog);
+		UPGL_LOG_ERROR("-----------------Program Linking Error-----------------\n %s", infoLog);
 	}
 }

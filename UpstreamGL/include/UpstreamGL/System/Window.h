@@ -14,6 +14,13 @@ struct WindowResolution
 	int Width;
 	int Height;
 	int RefreshRate;
+
+	template<class Archive>
+	void save(Archive& ar) const
+	{
+		ar(	CEREAL_NVP(Width),
+			CEREAL_NVP(Height), CEREAL_NVP(RefreshRate));
+	}
 };
 
 struct WindowSettings
@@ -26,7 +33,7 @@ struct WindowSettings
 	template<class Archive>
 	void save(Archive& ar) const
 	{
-		ar(	CEREAL_NVP(Width), CEREAL_NVP(Height),
+		ar(	CEREAL_NVP(Resolution),
 			CEREAL_NVP(Fullscreen), CEREAL_NVP(Resizable),
 			CEREAL_NVP(RedBits), CEREAL_NVP(GreenBits), 
 			CEREAL_NVP(BlueBits), CEREAL_NVP(AplhaBits), 

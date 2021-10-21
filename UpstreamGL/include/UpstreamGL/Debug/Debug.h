@@ -17,23 +17,18 @@
 #define UPGL_PROFILER_DRAW()
 #endif
 
-#ifdef  UPGL_DEBUG
-#define UPGL_DEBUG_LOG(message, ...)              Logger::GetInstance()->Log(LogEntry::None, message, __VA_ARGS__);
-#define UPGL_DEBUG_LOG_INFO(message, ...)         Logger::GetInstance()->Log(LogEntry::Info, message, __VA_ARGS__);
-#define UPGL_DEBUG_LOG_WARNING(message, ...)      Logger::GetInstance()->Log(LogEntry::Warning, message, __VA_ARGS__);
-#define UPGL_DEBUG_LOG_ERROR(message, ...)        Logger::GetInstance()->Log(LogEntry::Error, message, __VA_ARGS__);
-#define UPGL_DEBUG_LOG_CRITICAL(message, ...)     Logger::GetInstance()->Log(LogEntry::Critical, message, __VA_ARGS__);
-#else
-#define UPGL_DEBUG_LOG(message)          
-#define UPGL_DEBUG_LOG_INFO(message)     
-#define UPGL_DEBUG_LOG_WARNING(message)  
-#define UPGL_DEBUG_LOG_ERROR(message)    
-#define UPGL_DEBUG_LOG_CRITICAL(message) 
-#endif
+#define UPGL_VA_ARGS(...) , ##__VA_ARGS__
 
-#define VA_ARGS(...) , ##__VA_ARGS__
-#define UPGL_LOG(message, ...)                    Logger::GetInstance()->Log(LogEntry::None, message VA_ARGS(__VA_ARGS__));
-#define UPGL_LOG_INFO(message, ...)               Logger::GetInstance()->Log(LogEntry::Info, message VA_ARGS(__VA_ARGS__));
-#define UPGL_LOG_WARNING(message, ...)            Logger::GetInstance()->Log(LogEntry::Warning, message VA_ARGS(__VA_ARGS__));
-#define UPGL_LOG_ERROR(message, ...)              Logger::GetInstance()->Log(LogEntry::Error, message VA_ARGS(__VA_ARGS__));
-#define UPGL_LOG_CRITICAL(message, ...)           Logger::GetInstance()->Log(LogEntry::Critical, message VA_ARGS(__VA_ARGS__));
+#ifdef  UPGL_DEBUG
+#define UPGL_LOG(message, ...)                    Logger::GetInstance()->Log(LogEntry::None, message UPGL_VA_ARGS(__VA_ARGS__));
+#define UPGL_LOG_INFO(message, ...)               Logger::GetInstance()->Log(LogEntry::Info, message UPGL_VA_ARGS(__VA_ARGS__));
+#define UPGL_LOG_WARNING(message, ...)            Logger::GetInstance()->Log(LogEntry::Warning, message UPGL_VA_ARGS(__VA_ARGS__));
+#define UPGL_LOG_ERROR(message, ...)              Logger::GetInstance()->Log(LogEntry::Error, message UPGL_VA_ARGS(__VA_ARGS__));
+#define UPGL_LOG_CRITICAL(message, ...)           Logger::GetInstance()->Log(LogEntry::Critical, message UPGL_VA_ARGS(__VA_ARGS__));
+#else
+#define UPGL_LOG(message, ...)                    
+#define UPGL_LOG_INFO(message, ...)               
+#define UPGL_LOG_WARNING(message, ...)            
+#define UPGL_LOG_ERROR(message, ...)              
+#define UPGL_LOG_CRITICAL(message, ...)          
+#endif

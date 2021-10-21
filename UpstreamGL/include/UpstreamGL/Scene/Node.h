@@ -16,6 +16,15 @@ class Node
 {
 public:
 	Node(const std::string& name = "");
+
+	Node(Node&& node);
+	Node&& operator=(Node&& node);
+
+	Node(const Node& node) = delete;
+	Node& operator=(const Node& node) = delete;
+	
+	bool operator==(const Node& node) const;
+
 	virtual ~Node();
 
 	virtual void OnEnter();
@@ -36,6 +45,5 @@ public:
 
 private:
 	std::string m_Name;
-
 	ComponentRegistry m_ComponentRegistry;
 };

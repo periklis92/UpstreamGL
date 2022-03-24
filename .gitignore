@@ -1,0 +1,10 @@
+build
+.vscode
+.cmake
+CMakeFiles
+.vs 
+out
+Testing
+.cache
+3DExample
+resources

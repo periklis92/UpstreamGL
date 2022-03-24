@@ -1,0 +1,6 @@
+[submodule "libraries/reactphysics3d"]
+	path = libraries/reactphysics3d
+	url = https://github.com/DanielChappuis/reactphysics3d
+[submodule "libraries/cereal"]
+	path = libraries/cereal
+	url = https://github.com/USCiLab/cereal
